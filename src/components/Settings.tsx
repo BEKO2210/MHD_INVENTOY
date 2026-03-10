@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { version as appVersion } from '../../package.json';
 import { useLiveQuery } from 'dexie-react-hooks';
@@ -64,6 +64,19 @@ export function Settings() {
   const [showDatenschutz, setShowDatenschutz] = useState(false);
   const [showAGB, setShowAGB] = useState(false);
   const { t, i18n } = useTranslation();
+
+  // Pre-compute product counts for O(n) instead of O(n*m) per rendered item
+  const { categoryCounts, locationCounts } = useMemo(() => {
+    const catCounts: Record<string, number> = {};
+    const locCounts: Record<string, number> = {};
+    for (const p of allProducts) {
+      catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+      if (!p.archived) {
+        locCounts[p.storageLocation] = (locCounts[p.storageLocation] || 0) + 1;
+      }
+    }
+    return { categoryCounts: catCounts, locationCounts: locCounts };
+  }, [allProducts]);
 
   async function handleToggleNotifications() {
     if (notificationsEnabled) {
@@ -357,7 +370,7 @@ export function Settings() {
         </div>
         <div className="space-y-1">
           {locations.map((loc) => {
-            const usedCount = allProducts.filter((p) => !p.archived && p.storageLocation === loc.name).length;
+            const usedCount = locationCounts[loc.name] || 0;
             const isEditing = editingLocId === loc.id;
 
             return (
@@ -433,7 +446,7 @@ export function Settings() {
         <div className="mb-3 space-y-1">
           <p className="mb-1 text-xs font-medium text-gray-400">{t('settings.builtinCategories')}</p>
           {BUILTIN_CATEGORIES.map((key) => {
-            const usedCount = allProducts.filter((p) => p.category === key).length;
+            const usedCount = categoryCounts[key] || 0;
             return (
               <div key={key} className="flex items-center justify-between rounded-lg bg-primary-700/30 px-3 py-2">
                 <div className="flex items-center gap-2">
@@ -496,7 +509,7 @@ export function Settings() {
         <div className="space-y-1">
           {customCategories.map((cat) => {
             const isEditing = editingCatId === cat.id;
-            const usedCount = allProducts.filter((p) => p.category === cat.name).length;
+            const usedCount = categoryCounts[cat.name] || 0;
 
             return (
               <div key={cat.id} className="rounded-lg bg-primary-700/30 px-3 py-2">

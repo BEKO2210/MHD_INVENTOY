@@ -189,7 +189,7 @@ export function ProductForm() {
         expiryDate: new Date(form.expiryDate).toISOString(),
         expiryPrecision: form.expiryPrecision,
         photo: form.photo || undefined,
-        minStock: parseFloat(form.minStock) || undefined,
+        minStock: form.minStock !== '' && !isNaN(parseFloat(form.minStock)) ? parseFloat(form.minStock) : undefined,
         notes: form.notes || undefined,
         archived: false,
         createdAt: editingProductId ? existingProduct?.createdAt || new Date().toISOString() : new Date().toISOString(),
