@@ -32,7 +32,7 @@ const defaultForm: FormState = {
   name: '',
   barcode: '',
   category: 'lebensmittel',
-  storageLocation: 'Keller',
+  storageLocation: '',
   quantity: '1',
   unit: 'Stück',
   expiryDate: '',

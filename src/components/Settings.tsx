@@ -8,7 +8,7 @@ import { useDarkMode } from '../hooks/useDarkMode';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { useAppStore } from '../store/useAppStore';
 import { downloadFile } from '../lib/utils';
-import { DEFAULT_UNITS } from '../types';
+import { DEFAULT_UNITS, BUILTIN_CATEGORIES, CATEGORY_LABELS } from '../types';
 import {
   Bell,
   BellOff,
@@ -428,6 +428,27 @@ export function Settings() {
           {t('settings.manageCategories')}
         </h3>
         <p className="mb-3 text-xs text-gray-400">{t('settings.manageCategoriesDesc')}</p>
+
+        {/* Built-in categories */}
+        <div className="mb-3 space-y-1">
+          <p className="mb-1 text-xs font-medium text-gray-400">{t('settings.builtinCategories')}</p>
+          {BUILTIN_CATEGORIES.map((key) => {
+            const usedCount = allProducts.filter((p) => p.category === key).length;
+            return (
+              <div key={key} className="flex items-center justify-between rounded-lg bg-primary-700/30 px-3 py-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-300">{CATEGORY_LABELS[key]}</span>
+                  {usedCount > 0 && (
+                    <span className="rounded-full bg-primary-600 px-1.5 py-0.5 text-[10px] text-gray-400">
+                      {usedCount}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[10px] text-gray-500">{key}</span>
+              </div>
+            );
+          })}
+        </div>
 
         {/* Add new category */}
         <div className="mb-3 space-y-2 rounded-lg border border-primary-600 bg-primary-900/50 p-3">

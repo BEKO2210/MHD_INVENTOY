@@ -60,7 +60,7 @@ export function Statistics() {
       topConsumed: topConsumedList,
       expiryRate: rate,
     };
-  }, [products, consumptionLogs, t]);
+  }, [products, consumptionLogs]);
 
   return (
     <div className="space-y-6">

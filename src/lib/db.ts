@@ -2,12 +2,13 @@ import Dexie, { type Table } from 'dexie';
 import { version as appVersion } from '../../package.json';
 import i18n from '../i18n/i18n';
 import { getLocale } from './utils';
-import type {
-  Product,
-  StorageLocation,
-  ConsumptionLog,
-  NotificationSchedule,
-  CustomCategory,
+import {
+  getCategoryLabel,
+  type Product,
+  type StorageLocation,
+  type ConsumptionLog,
+  type NotificationSchedule,
+  type CustomCategory,
 } from '../types';
 
 export class MhdInventarDB extends Dexie {
@@ -236,7 +237,7 @@ export async function exportCSV(): Promise<string> {
   const rows = products.map((p) => [
     escCsv(p.name),
     escCsv(p.barcode),
-    escCsv(t(`categories.${p.category}`)),
+    escCsv(getCategoryLabel(p.category)),
     escCsv(p.storageLocation),
     escCsv(p.quantity),
     escCsv(t(`units.${p.unit}`)),

@@ -64,7 +64,7 @@ export function Dashboard() {
       categoryBreakdown: catBreakdown,
       total: Math.max(s.totalProducts, 1),
     };
-  }, [products, t]);
+  }, [products]);
 
   if (activeProducts.length === 0) {
     return (

@@ -144,6 +144,14 @@ export const BUILTIN_CATEGORIES: ProductCategory[] = [
   'feuerschutz', 'erste_hilfe', 'arbeitsschutz', 'baustoffe', 'sonstiges',
 ];
 
+/** Get display label for any category (built-in or custom) */
+export function getCategoryLabel(category: string): string {
+  if (BUILTIN_CATEGORIES.includes(category as ProductCategory)) {
+    return CATEGORY_LABELS[category as ProductCategory];
+  }
+  return category; // custom categories use their name directly
+}
+
 export interface CustomCategory {
   id?: number;
   name: string;
