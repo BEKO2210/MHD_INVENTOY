@@ -11,7 +11,7 @@ import {
 } from '../types';
 import { Camera, Upload, X, Save, ArrowLeft } from 'lucide-react';
 
-const FORM_STORAGE_KEY = 'preptrack-form-draft';
+const FORM_STORAGE_KEY = 'mhd-inventar-form-draft';
 
 interface FormState {
   name: string;

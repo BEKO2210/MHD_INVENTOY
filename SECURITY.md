@@ -7,11 +7,11 @@
 | Latest  | ✅ Yes             |
 | Older   | ❌ No              |
 
-Only the latest deployed version of PrepTrack receives security updates.
+Only the latest deployed version of MHD-Inventar receives security updates.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in PrepTrack, please report it responsibly:
+If you discover a security vulnerability in MHD-Inventar, please report it responsibly:
 
 **Email:** [belkis.aslani@gmail.com](mailto:belkis.aslani@gmail.com)
 
@@ -33,7 +33,7 @@ If you discover a security vulnerability in PrepTrack, please report it responsi
 
 ## Security Measures
 
-PrepTrack implements the following security measures:
+MHD-Inventar implements the following security measures:
 
 ### Data Privacy
 - All user data is stored exclusively in the browser's IndexedDB
@@ -56,7 +56,7 @@ PrepTrack implements the following security measures:
 ## Scope
 
 The following are in scope:
-- The PrepTrack web application at `https://beko2210.github.io/Prepper_Log/`
+- The MHD-Inventar web application at `https://beko2210.github.io/MHD_INVENTOY/`
 - The source code in this repository
 
 The following are out of scope:

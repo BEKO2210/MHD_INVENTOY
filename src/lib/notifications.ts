@@ -39,7 +39,7 @@ export function showLocalNotification(
     body,
     icon: './icons/icon-192x192.png',
     badge: './icons/icon-192x192.png',
-    tag: tag || `preptrack-${Date.now()}`,
+    tag: tag || `mhd-inventar-${Date.now()}`,
     requireInteraction: false,
     silent: false,
   });
@@ -104,11 +104,11 @@ export async function checkAndNotifyExpiringProducts(): Promise<void> {
 
 export function startNotificationChecker(): ReturnType<typeof setInterval> {
   checkAndNotifyExpiringProducts().catch((err) =>
-    console.error('[PrepTrack] Benachrichtigungsprüfung fehlgeschlagen:', err)
+    console.error('[MHD-Inventar] Benachrichtigungsprüfung fehlgeschlagen:', err)
   );
   return setInterval(() => {
     checkAndNotifyExpiringProducts().catch((err) =>
-      console.error('[PrepTrack] Benachrichtigungsprüfung fehlgeschlagen:', err)
+      console.error('[MHD-Inventar] Benachrichtigungsprüfung fehlgeschlagen:', err)
     );
   }, 1000 * 60 * 60);
 }

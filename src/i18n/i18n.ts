@@ -23,7 +23,7 @@ i18n
     },
     detection: {
       order: ['localStorage', 'navigator'],
-      lookupLocalStorage: 'preptrack-language',
+      lookupLocalStorage: 'mhd-inventar-language',
       caches: ['localStorage'],
     },
   });

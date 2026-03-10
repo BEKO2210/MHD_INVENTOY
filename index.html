@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>PrepTrack — Vorratsverwaltung für Prepper | MHD-Tracker &amp; Barcode-Scanner PWA</title>
-    <meta name="description" content="PrepTrack ist die kostenlose Offline-PWA zur Vorratsverwaltung. Barcode scannen, Mindesthaltbarkeitsdaten tracken, Lagerorte verwalten und Benachrichtigungen vor Ablauf erhalten. Für Prepper, Krisenvorsorge und Haushalt." />
+    <title>MHD-Inventar — Professionelle Fristenverwaltung | MHD-Tracker &amp; Barcode-Scanner PWA</title>
+    <meta name="description" content="MHD-Inventar ist die professionelle Offline-PWA zur Verwaltung von Mindesthaltbarkeitsdaten. Artikel scannen, MHD tracken, ISO/DIN-Normen anzeigen und rechtzeitig benachrichtigt werden. Für Unternehmen, Werkstätten und Lager." />
     <meta name="author" content="Belkis Aslani" />
-    <link rel="canonical" href="https://beko2210.github.io/Prepper_Log/" />
 
     <!-- PWA: manifest injected by vite-plugin-pwa -->
     <meta name="theme-color" content="#1a3a2a" />
@@ -15,7 +14,7 @@
     <!-- iOS PWA -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="PrepTrack" />
+    <meta name="apple-mobile-web-app-title" content="MHD-Inventar" />
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
 
     <!-- Favicon -->
@@ -24,14 +23,14 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="PrepTrack — Dein Vorrat. Immer im Blick." />
-    <meta property="og:description" content="Offline-first PWA für Prepper und Vorratshaltung." />
+    <meta property="og:title" content="MHD-Inventar — Fristen im Griff. Bestände im Blick." />
+    <meta property="og:description" content="Professionelle Offline-PWA zur MHD-Inventarverwaltung mit ISO/DIN-Normen." />
     <meta property="og:image" content="./screenshots/screenshot-desktop.png" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PrepTrack — Dein Vorrat. Immer im Blick." />
-    <meta name="twitter:description" content="Offline-first PWA für Prepper und Vorratshaltung." />
+    <meta name="twitter:title" content="MHD-Inventar — Fristen im Griff. Bestände im Blick." />
+    <meta name="twitter:description" content="Professionelle Offline-PWA zur MHD-Inventarverwaltung mit ISO/DIN-Normen." />
 
     <!-- CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.bunny.net; font-src 'self' https://fonts.bunny.net; img-src 'self' data: blob: https://images.openfoodfacts.org; connect-src 'self' https://world.openfoodfacts.org; media-src 'self' blob:; worker-src 'self'; manifest-src 'self';" />
@@ -44,7 +43,7 @@
     <script>
       // Apply dark mode synchronously before React renders to prevent flash
       (function() {
-        var stored = localStorage.getItem('preptrack-dark-mode');
+        var stored = localStorage.getItem('mhd-inventar-dark-mode');
         if (stored === 'false') {
           document.documentElement.classList.remove('dark');
         } else if (stored === null) {

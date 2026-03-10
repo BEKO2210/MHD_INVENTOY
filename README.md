@@ -1,79 +1,116 @@
 <p align="center">
-  <img src="public/icons/icon-192x192.png" width="100" height="100" alt="PrepTrack Logo" />
+  <img src="public/icons/icon-192x192.png" width="100" height="100" alt="MHD-Inventar Logo" />
 </p>
 
-<h1 align="center">PrepTrack</h1>
+<h1 align="center">MHD-Inventar</h1>
 
 <p align="center">
-  <strong>Your supplies. Always in sight.</strong><br>
-  <sub>Dein Vorrat. Immer im Blick.</sub>
-</p>
-
-<p align="center">
-  <a href="https://beko2210.github.io/Prepper_Log/"><img src="https://img.shields.io/badge/Live_Demo-PrepTrack-2ea44f?style=for-the-badge&logo=github" alt="Live Demo" /></a>
+  <strong>Expiry dates under control. Inventory at a glance.</strong><br>
+  <sub>Fristen im Griff. Bestaende im Blick.</sub>
 </p>
 
 <p align="center">
-  <a href="https://github.com/BEKO2210/Prepper_Log/actions/workflows/deploy.yml"><img src="https://img.shields.io/github/actions/workflow/status/BEKO2210/Prepper_Log/deploy.yml?branch=main&label=CI%2FCD&logo=githubactions&logoColor=white" alt="CI/CD" /></a>
-  <a href="https://github.com/BEKO2210/Prepper_Log/releases"><img src="https://img.shields.io/github/v/release/BEKO2210/Prepper_Log?include_prereleases&label=version&color=blue" alt="Version" /></a>
-  <a href="https://github.com/BEKO2210/Prepper_Log/blob/main/LICENSE"><img src="https://img.shields.io/github/license/BEKO2210/Prepper_Log?color=orange" alt="License" /></a>
-  <a href="https://github.com/BEKO2210/Prepper_Log/stargazers"><img src="https://img.shields.io/github/stars/BEKO2210/Prepper_Log?style=social" alt="Stars" /></a>
-  <a href="https://github.com/BEKO2210/Prepper_Log/issues"><img src="https://img.shields.io/github/issues/BEKO2210/Prepper_Log?color=red" alt="Issues" /></a>
-  <a href="https://github.com/BEKO2210/Prepper_Log/network/members"><img src="https://img.shields.io/github/forks/BEKO2210/Prepper_Log?style=social" alt="Forks" /></a>
+  <a href="https://beko2210.github.io/MHD_INVENTOY/"><img src="https://img.shields.io/badge/Live_Demo-MHD--Inventar-2ea44f?style=for-the-badge&logo=github" alt="Live Demo" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/BEKO2210/MHD_INVENTOY/actions/workflows/deploy.yml"><img src="https://img.shields.io/github/actions/workflow/status/BEKO2210/MHD_INVENTOY/deploy.yml?branch=main&label=CI%2FCD&logo=githubactions&logoColor=white" alt="CI/CD" /></a>
+  <a href="https://github.com/BEKO2210/MHD_INVENTOY/releases"><img src="https://img.shields.io/github/v/release/BEKO2210/MHD_INVENTOY?include_prereleases&label=version&color=blue" alt="Version" /></a>
+  <a href="https://github.com/BEKO2210/MHD_INVENTOY/blob/main/LICENSE"><img src="https://img.shields.io/github/license/BEKO2210/MHD_INVENTOY?color=orange" alt="License" /></a>
+  <a href="https://github.com/BEKO2210/MHD_INVENTOY/stargazers"><img src="https://img.shields.io/github/stars/BEKO2210/MHD_INVENTOY?style=social" alt="Stars" /></a>
+  <a href="https://github.com/BEKO2210/MHD_INVENTOY/issues"><img src="https://img.shields.io/github/issues/BEKO2210/MHD_INVENTOY?color=red" alt="Issues" /></a>
+  <a href="https://github.com/BEKO2210/MHD_INVENTOY/network/members"><img src="https://img.shields.io/github/forks/BEKO2210/MHD_INVENTOY?style=social" alt="Forks" /></a>
 </p>
 
 <p align="center">
   <a href="#-features">Features</a>&nbsp;&bull;
+  <a href="#-product-categories--standards">Categories</a>&nbsp;&bull;
   <a href="#-screenshots">Screenshots</a>&nbsp;&bull;
   <a href="#-tech-stack">Tech Stack</a>&nbsp;&bull;
   <a href="#-getting-started">Getting Started</a>&nbsp;&bull;
-  <a href="#-contributing">Contributing</a>&nbsp;&bull;
-  <a href="#-license">License</a>
+  <a href="#-licensing">Licensing</a>
 </p>
 
 <p align="center">
-  <a href="#-deutsch">🇩🇪 Deutsche Version weiter unten</a>
+  <a href="#-deutsch">Deutsche Version weiter unten</a>
 </p>
 
 ---
 
-## What is PrepTrack?
+## What is MHD-Inventar?
 
-PrepTrack is a **free, ad-free, offline-first Progressive Web App** for managing your emergency supplies, pantry, and stockpile. Scan barcodes, track expiry dates, receive local notifications — all data stays on your device. No cloud. No accounts. No tracking.
+MHD-Inventar is a **professional, offline-first Progressive Web App** for enterprise-grade expiry date management and inventory tracking. Designed for companies that need to monitor shelf life, compliance deadlines, and safety-relevant expiration dates across all product categories — from food and pharmaceuticals to fire extinguishers, chemicals, PPE, and automotive fluids.
 
-> **Built for preppers, self-sufficiency enthusiasts, and anyone who wants to keep their supplies organized.**
+> **Built for businesses, facility managers, quality assurance teams, and compliance officers who need reliable, standards-compliant inventory tracking.**
+
+MHD-Inventar supports **15 product categories**, each mapped to the relevant **ISO/DIN/EU norms**, ensuring your organization stays compliant and audit-ready at all times. All data remains on-device — no cloud dependency, no downtime risk.
 
 ---
 
-## ✨ Features
+## Key Advantages for Businesses
+
+- **Regulatory Compliance** — Each category includes references to applicable ISO, DIN, EU, and GHS standards
+- **Zero Downtime** — Fully offline-capable; works in warehouses, workshops, and field locations without internet
+- **No Cloud Risk** — All data stored locally in IndexedDB; no third-party data processing
+- **Multi-Device Deployment** — Install as PWA on tablets, smartphones, and desktop workstations
+- **Audit-Ready Exports** — JSON backup and CSV export with proper encoding for Excel/ERP integration
+- **Multi-Language** — German (default), English, Portuguese, and Arabic for international teams
+
+---
+
+## Features
 
 | Feature | Description |
 |---------|-------------|
-| **Barcode Scanner** | Scan barcodes with your camera. Auto-lookup via Open Food Facts API. Duplicate detection. |
-| **Product Management** | Name, category, location, quantity, unit, expiry date (day/month/year precision), photo, notes. |
-| **Expiry Tracking** | Color-coded warnings: Red (expired/critical), Orange (warning), Yellow (soon), Green (OK). |
-| **Dashboard** | StatRing visualization, expiry distribution bar, urgent products, category overview, low stock counter. |
-| **Local Notifications** | Push reminders 30, 14, 7, 3, and 1 day before expiry. No external servers. |
-| **Storage Locations** | Create and manage custom locations. 8 defaults included. |
-| **Consumption Log** | Mark products as consumed, expired, or damaged. View statistics. |
-| **Data Export** | JSON backup (complete) and CSV export (Excel/Google Sheets compatible with proper encoding). |
-| **Data Import** | Restore from backup with automatic duplicate detection. |
-| **Offline-First** | Fully functional offline. All data in IndexedDB. Service Worker caches assets, fonts, and API responses. |
-| **Installable PWA** | Install as native app on Android, iOS, and Desktop. |
-| **Dark & Light Mode** | Dark theme by default. Toggle to light theme anytime. |
-| **Multi-Language** | German (default), English, Portuguese, and Arabic. Language switcher with country flags in settings. |
+| **Barcode Scanner** | Scan barcodes with device camera. Auto-lookup via Open Food Facts API. Duplicate detection prevents double entries. |
+| **Product Management** | Name, category (15 categories), location, quantity, unit, expiry date (day/month/year precision), photo, notes, ISO/DIN norm references. |
+| **Expiry Tracking** | Color-coded status system: Red (expired/critical), Orange (warning), Yellow (approaching), Green (OK). |
+| **Dashboard** | StatRing visualization, expiry distribution bar, urgent products overview, category breakdown, low-stock alerts. |
+| **Local Notifications** | Automated reminders 30, 14, 7, 3, and 1 day before expiry. No external push servers required. |
+| **Storage Locations** | Create and manage custom storage locations (warehouses, shelves, vehicles, buildings). 8 defaults included. |
+| **Consumption Log** | Track products as consumed, expired, or disposed. Historical statistics for reporting. |
+| **Data Export** | JSON backup (complete dataset) and CSV export (Excel/Google Sheets/ERP compatible with BOM encoding). |
+| **Data Import** | Restore from backup with automatic duplicate detection (name + expiry + location matching). |
+| **Offline-First** | Fully functional without internet. All data in IndexedDB. Service Worker caches all assets. |
+| **Installable PWA** | Deploy as native-like app on Android, iOS, and Desktop. No app store required. |
+| **Dark & Light Mode** | Professional dark theme by default. Light theme available for bright environments. |
+| **Multi-Language** | German, English, Portuguese, and Arabic with in-app language switcher. |
 
 ---
 
-## 📱 Screenshots
+## Product Categories & Standards
+
+MHD-Inventar supports **15 specialized product categories**, each linked to the applicable regulatory standards:
+
+| Category | Applicable Standards |
+|----------|---------------------|
+| **Lebensmittel (Food)** | ISO 22000, HACCP |
+| **Getraenke (Beverages)** | EU-VO 178/2002 |
+| **Medizin & Pharma** | ISO 15223, DIN EN ISO 11607 |
+| **Kosmetik & Hygiene** | EU-VO 1223/2009 |
+| **Chemikalien & Gefahrstoffe** | GHS/CLP-VO 1272/2008 |
+| **Kfz-Betriebsstoffe** | DOT 3/4/5.1, DIN 51502 |
+| **Batterien & Akkus** | IEC 60086, EU-VO 2023/1542 |
+| **Elektronik & Technik** | RoHS, WEEE |
+| **Reinigungsmittel** | CLP-VO, Biozid-VO |
+| **Schmierstoffe & Oele** | DIN 51502, ISO 6743 |
+| **Brandschutz & Loeschmittel** | DIN EN 3, ISO 7010 |
+| **Erste Hilfe & Verband** | DIN 13157, DIN 13169 |
+| **PSA & Arbeitsschutz** | EU-VO 2016/425 |
+| **Baustoffe & Klebstoffe** | DIN EN 197 |
+| **Sonstiges** | User-defined |
+
+---
+
+## Screenshots
 
 <details>
-<summary><strong>🌙 Dark Mode</strong></summary>
+<summary><strong>Dark Mode</strong></summary>
 <br>
 <p align="center">
   <img src="public/screenshots/Screenshot_Dashboard_dunkel.jpg" width="250" alt="Dashboard Dark" />
   &nbsp;
-  <img src="public/screenshots/Screenshot_Vorräte_dunkel.jpg" width="250" alt="Supplies Dark" />
+  <img src="public/screenshots/Screenshot_Vorräte_dunkel.jpg" width="250" alt="Inventory Dark" />
   &nbsp;
   <img src="public/screenshots/Screenshot_Produkt_detail_dunkel.jpg" width="250" alt="Product Detail Dark" />
 </p>
@@ -87,12 +124,12 @@ PrepTrack is a **free, ad-free, offline-first Progressive Web App** for managing
 </details>
 
 <details open>
-<summary><strong>☀️ Light Mode</strong></summary>
+<summary><strong>Light Mode</strong></summary>
 <br>
 <p align="center">
   <img src="public/screenshots/Screenshot_Dashboard_hell.jpg" width="250" alt="Dashboard Light" />
   &nbsp;
-  <img src="public/screenshots/Screenshot_Vorräte_hell.jpg" width="250" alt="Supplies Light" />
+  <img src="public/screenshots/Screenshot_Vorräte_hell.jpg" width="250" alt="Inventory Light" />
   &nbsp;
   <img src="public/screenshots/Screenshot_Produkt_detail_hell.jpg" width="250" alt="Product Detail Light" />
 </p>
@@ -106,7 +143,7 @@ PrepTrack is a **free, ad-free, offline-first Progressive Web App** for managing
 </details>
 
 <details>
-<summary><strong>🌐 Language Switcher (Multi-Language)</strong></summary>
+<summary><strong>Language Switcher (Multi-Language)</strong></summary>
 <br>
 <p align="center">
   <img src="public/screenshots/Screenshot_Einstellungen_hell_en.jpg" width="250" alt="Settings English Light" />
@@ -117,27 +154,27 @@ PrepTrack is a **free, ad-free, offline-first Progressive Web App** for managing
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Category | Technology | Purpose |
 |----------|-----------|---------|
 | **Framework** | React 18 + TypeScript | Interactive SPA with type safety |
-| **Bundler** | Vite 6 | Fast dev server, optimized builds |
-| **Styling** | Tailwind CSS 3 | Utility-first, dark mode support |
-| **State** | Zustand | Lightweight, no boilerplate |
-| **Database** | Dexie.js (IndexedDB) | Offline-first, reactive queries |
-| **PWA** | vite-plugin-pwa (Workbox) | Auto-update, runtime caching |
-| **Scanner** | @zxing/browser | Barcode/EAN recognition via camera |
+| **Bundler** | Vite 6 | Fast dev server, optimized production builds |
+| **Styling** | Tailwind CSS 3 | Utility-first CSS, dark mode support |
+| **State** | Zustand | Lightweight, performant state management |
+| **Database** | Dexie.js (IndexedDB) | Offline-first, reactive queries, local persistence |
+| **PWA** | vite-plugin-pwa (Workbox) | Auto-update, runtime caching, offline support |
+| **Scanner** | @zxing/browser | Barcode/EAN recognition via device camera |
 | **i18n** | react-i18next | Multi-language support (DE/EN/PT/AR) |
 | **Icons** | Lucide React | Consistent, lightweight SVG icons |
 | **Animation** | Framer Motion | Smooth UI transitions |
-| **API** | Open Food Facts | Free product database |
-| **CI/CD** | GitHub Actions | Auto-deploy to GitHub Pages |
+| **API** | Open Food Facts | Product database for barcode lookup |
+| **CI/CD** | GitHub Actions | Automated testing and deployment |
 | **Testing** | Vitest | Unit tests (59 tests) |
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -148,8 +185,8 @@ PrepTrack is a **free, ad-free, offline-first Progressive Web App** for managing
 
 ```bash
 # Clone the repository
-git clone https://github.com/BEKO2210/Prepper_Log.git
-cd Prepper_Log
+git clone https://github.com/BEKO2210/MHD_INVENTOY.git
+cd MHD_INVENTOY
 
 # Install dependencies
 npm install
@@ -177,7 +214,9 @@ npx tsc --noEmit   # Type check without building
 
 ---
 
-## 📲 PWA Installation
+## PWA Installation
+
+MHD-Inventar can be deployed as a native-like application on company devices without any app store:
 
 <table>
 <tr>
@@ -208,29 +247,29 @@ npx tsc --noEmit   # Type check without building
 
 ---
 
-## 🔒 Privacy
+## Data Privacy & Security
 
-PrepTrack takes your privacy seriously:
+MHD-Inventar is designed with enterprise data security in mind:
 
-- **All data stored locally** on your device (IndexedDB). No cloud. No servers. No accounts.
-- **No tracking.** No analytics. No cookies. No ads. No data shared with third parties.
-- **External service:** Only the Open Food Facts API is contacted during barcode scans (open-source, non-profit). Only the barcode is transmitted.
-- **Notifications** are generated locally. No push tokens sent to external servers.
-- **Full control:** Export/import your data anytime. Delete via browser settings.
+- **All data stored locally** on the device (IndexedDB). No cloud servers. No user accounts. No data leaves the device.
+- **No tracking.** No analytics. No cookies. No advertising. No third-party data sharing.
+- **External service:** Only the Open Food Facts API is contacted during barcode scans (open-source, non-profit). Only the barcode number is transmitted.
+- **Notifications** are generated locally on-device. No push tokens sent to external servers.
+- **Full data sovereignty:** Export and import data anytime. Delete via browser settings. Your data, your control.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 src/
 ├── components/           UI Components
-│   ├── Dashboard.tsx         Main overview with stats
-│   ├── ProductList.tsx       Product list with filters
+│   ├── Dashboard.tsx         Main overview with stats and alerts
+│   ├── ProductList.tsx       Inventory list with search and filters
 │   ├── ProductForm.tsx       Add/edit form with draft persistence
-│   ├── BarcodeScanner.tsx    Camera barcode scanner
-│   ├── Settings.tsx          Settings, language, export/import, legal
-│   ├── Statistics.tsx        Consumption statistics
+│   ├── BarcodeScanner.tsx    Camera barcode scanner with API lookup
+│   ├── Settings.tsx          Configuration, language, export/import
+│   ├── Statistics.tsx        Consumption and expiry statistics
 │   ├── Navigation.tsx        Bottom navigation bar
 │   ├── StatRing.tsx          SVG ring chart component
 │   ├── OfflineBanner.tsx     Offline indicator
@@ -247,11 +286,11 @@ src/
 │   ├── db.ts                 Dexie.js database, CRUD, export/import
 │   ├── utils.ts              Expiry calculation, formatting, barcode lookup
 │   ├── utils.test.ts         Unit tests (59 tests)
-│   └── notifications.ts      Local notifications
+│   └── notifications.ts      Local notification scheduling
 ├── store/                State Management
 │   └── useAppStore.ts        Zustand store (navigation, filters, state)
 ├── types/                TypeScript Types
-│   └── index.ts              Product, Category, Units, etc.
+│   └── index.ts              Product, Category, Units, Norms, etc.
 ├── App.tsx               Main component with routing
 ├── main.tsx              Entry point
 └── sw-handler.ts         Service Worker update handler
@@ -259,63 +298,37 @@ src/
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! Please read the [Contributing Guide](CONTRIBUTING.md) before submitting a pull request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-See [open issues](https://github.com/BEKO2210/Prepper_Log/issues) for planned features and known bugs.
-
----
-
-## 🛡 Security
+## Security
 
 If you discover a security vulnerability, please report it responsibly. See [SECURITY.md](SECURITY.md) for details.
 
 ---
 
-## 📊 Star History
+## Licensing & Contact
 
-<a href="https://star-history.com/#BEKO2210/Prepper_Log&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=BEKO2210/Prepper_Log&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=BEKO2210/Prepper_Log&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=BEKO2210/Prepper_Log&type=Date" />
- </picture>
-</a>
+MHD-Inventar is a commercial B2B product licensed to businesses and organizations.
 
----
+For licensing inquiries, volume pricing, custom deployments, or enterprise support, please contact:
 
-## ❤️ Support
+**Belkis Aslani**
+GitHub: [@BEKO2210](https://github.com/BEKO2210)
+Repository: [github.com/BEKO2210/MHD_INVENTOY](https://github.com/BEKO2210/MHD_INVENTOY)
 
-PrepTrack is free and ad-free. If you like the app, you can support development:
-
-<p align="center">
-  <a href="https://www.paypal.com/donate?business=renateweinfurtner%40gmx.de&currency_code=EUR&item_name=PrepTrack%20Spende">
-    <img src="https://img.shields.io/badge/Donate-PayPal-0070ba?style=for-the-badge&logo=paypal&logoColor=white" alt="Donate with PayPal" />
-  </a>
-</p>
-
-Or simply give the project a ⭐ on GitHub — it helps a lot!
+> For feature requests and bug reports, please use the [issue tracker](https://github.com/BEKO2210/MHD_INVENTOY/issues).
 
 ---
 
-## 👨‍💻 Development
+## Development
 
 This project was developed with the assistance of **Claude Code** (Anthropic, Model: claude-opus-4-6).
 
-That does not mean blind copy-paste or generated spaghetti code. Every function was controlled through targeted instructions, every bug was analyzed and systematically fixed, every feature was implemented and tested step by step. The human sets the direction, the AI executes.
+Every function was controlled through targeted instructions, every bug was analyzed and systematically fixed, every feature was implemented and tested step by step. The human sets the direction, the AI executes.
 
 > See [CHANGELOG.md](CHANGELOG.md) for the complete change history.
 
 ---
 
-## 📄 License
+## License
 
 ```
 Copyright 2026 Belkis Aslani
@@ -333,56 +346,93 @@ See [LICENSE](LICENSE) for the full license text.
 
 ---
 
-<h1 align="center" id="-deutsch">🇩🇪 Deutsch</h1>
+<h1 align="center" id="-deutsch">Deutsch</h1>
 
 <p align="center">
-  <strong>Dein Vorrat. Immer im Blick.</strong>
+  <strong>Fristen im Griff. Bestaende im Blick.</strong>
 </p>
 
 ---
 
-## Was ist PrepTrack?
+## Was ist MHD-Inventar?
 
-PrepTrack ist eine **kostenlose, werbefreie, Offline-first Progressive Web App** zur Verwaltung von Vorräten. Produkte scannen, Mindesthaltbarkeitsdaten tracken, Benachrichtigungen erhalten — alle Daten bleiben auf deinem Gerät. Keine Cloud. Keine Accounts. Kein Tracking.
+MHD-Inventar ist eine **professionelle, Offline-first Progressive Web App** fuer unternehmensweites MHD- und Bestandsmanagement. Entwickelt fuer Unternehmen, die Mindesthaltbarkeitsdaten, Compliance-Fristen und sicherheitsrelevante Ablaufdaten ueber alle Produktkategorien hinweg ueberwachen muessen — von Lebensmitteln und Pharmazeutika ueber Brandschutzmittel und Chemikalien bis hin zu PSA und Kfz-Betriebsstoffen.
 
-> **Entwickelt für Prepper, Selbstversorger und alle, die ihren Vorrat im Griff haben wollen.**
+> **Entwickelt fuer Unternehmen, Facility Manager, Qualitaetssicherungsteams und Compliance-Beauftragte, die zuverlaessiges, normenkonformes Bestandsmanagement benoetigen.**
+
+MHD-Inventar unterstuetzt **15 Produktkategorien**, jeweils mit Referenzen zu den relevanten **ISO/DIN/EU-Normen**, damit Ihre Organisation jederzeit compliant und audit-bereit bleibt.
 
 ---
 
-## ✨ Funktionen
+## Vorteile fuer Unternehmen
+
+- **Regulatorische Compliance** — Jede Kategorie mit Referenzen zu ISO-, DIN-, EU- und GHS-Normen
+- **Kein Ausfallrisiko** — Vollstaendig offline-faehig; funktioniert in Lagern, Werkstaetten und im Aussendienst ohne Internet
+- **Kein Cloud-Risiko** — Alle Daten lokal in IndexedDB gespeichert; keine Drittanbieter-Datenverarbeitung
+- **Multi-Device-Einsatz** — Installierbar als PWA auf Tablets, Smartphones und Desktop-Arbeitsplaetzen
+- **Audit-feste Exporte** — JSON-Backup und CSV-Export mit korrekter Kodierung fuer Excel/ERP-Integration
+- **Mehrsprachig** — Deutsch (Standard), Englisch, Portugiesisch und Arabisch fuer internationale Teams
+
+---
+
+## Funktionen
 
 | Funktion | Beschreibung |
 |----------|-------------|
-| **Barcode-Scanner** | Barcode scannen mit der Kamera. Automatische Erkennung via Open Food Facts API. Duplikat-Warnung. |
-| **Produktverwaltung** | Name, Kategorie, Lagerort, Menge, Einheit, MHD (Tag/Monat/Jahr), Foto, Notizen. |
-| **MHD-Tracking** | Farbcodierte Warnung: Rot (abgelaufen/kritisch), Orange (Warnung), Gelb (bald), Grün (OK). |
-| **Dashboard** | StatRing-Visualisierung, MHD-Verteilung, dringende Produkte, Kategorien, Unterbestand. |
-| **Benachrichtigungen** | Lokale Push-Erinnerungen 30, 14, 7, 3 und 1 Tag vor Ablauf. Keine externen Server. |
-| **Lagerorte** | Eigene Lagerorte anlegen und verwalten. 8 Standard-Lagerorte vorinstalliert. |
-| **Verbrauchslog** | Produkte als verbraucht, abgelaufen oder beschädigt markieren. Statistiken einsehen. |
-| **Daten-Export** | JSON-Backup (vollständig) und CSV-Export (Excel/Google Sheets kompatibel). |
-| **Daten-Import** | Backup wiederherstellen mit automatischer Duplikat-Erkennung. |
-| **Offline-First** | Vollständig offline nutzbar. Alle Daten in IndexedDB. Service Worker cached alles. |
-| **Installierbar** | Als PWA auf Android, iOS und Desktop installierbar. Fühlt sich an wie native App. |
-| **Dark & Light Mode** | Dunkles Design als Standard. Jederzeit umschaltbar. |
-| **Mehrsprachig** | Deutsch (Standard), Englisch, Portugiesisch und Arabisch. Sprachumschalter mit Länderflaggen in den Einstellungen. |
+| **Barcode-Scanner** | Barcode scannen mit der Kamera. Automatische Erkennung via Open Food Facts API. Duplikat-Warnung bei Doppeleintraegen. |
+| **Produktverwaltung** | Name, Kategorie (15 Kategorien), Lagerort, Menge, Einheit, MHD (Tag/Monat/Jahr), Foto, Notizen, ISO/DIN-Normreferenzen. |
+| **MHD-Tracking** | Farbcodiertes Statussystem: Rot (abgelaufen/kritisch), Orange (Warnung), Gelb (bald faellig), Gruen (OK). |
+| **Dashboard** | StatRing-Visualisierung, MHD-Verteilung, dringende Produkte, Kategorieuebersicht, Unterbestand-Warnungen. |
+| **Benachrichtigungen** | Automatische Erinnerungen 30, 14, 7, 3 und 1 Tag vor Ablauf. Keine externen Push-Server erforderlich. |
+| **Lagerorte** | Eigene Lagerorte anlegen und verwalten (Lager, Regale, Fahrzeuge, Gebaeude). 8 Standard-Lagerorte vorinstalliert. |
+| **Verbrauchsprotokoll** | Produkte als verbraucht, abgelaufen oder entsorgt erfassen. Historische Statistiken fuer Berichte. |
+| **Daten-Export** | JSON-Backup (vollstaendiger Datensatz) und CSV-Export (Excel/ERP-kompatibel mit BOM-Kodierung). |
+| **Daten-Import** | Backup wiederherstellen mit automatischer Duplikat-Erkennung (Name + MHD + Lagerort). |
+| **Offline-First** | Vollstaendig offline nutzbar. Alle Daten in IndexedDB. Service Worker cached alle Assets. |
+| **Installierbar** | Als PWA auf Android, iOS und Desktop installierbar — ohne App Store. |
+| **Dark & Light Mode** | Professionelles dunkles Design als Standard. Helles Design fuer helle Arbeitsumgebungen. |
+| **Mehrsprachig** | Deutsch, Englisch, Portugiesisch und Arabisch mit Sprachumschalter in den Einstellungen. |
 
 ---
 
-## 📱 Screenshots
+## Produktkategorien & Normen
+
+MHD-Inventar unterstuetzt **15 spezialisierte Produktkategorien**, jeweils verknuepft mit den anwendbaren regulatorischen Standards:
+
+| Kategorie | Anwendbare Normen |
+|-----------|------------------|
+| **Lebensmittel** | ISO 22000, HACCP |
+| **Getraenke** | EU-VO 178/2002 |
+| **Medizin & Pharma** | ISO 15223, DIN EN ISO 11607 |
+| **Kosmetik & Hygiene** | EU-VO 1223/2009 |
+| **Chemikalien & Gefahrstoffe** | GHS/CLP-VO 1272/2008 |
+| **Kfz-Betriebsstoffe** | DOT 3/4/5.1, DIN 51502 |
+| **Batterien & Akkus** | IEC 60086, EU-VO 2023/1542 |
+| **Elektronik & Technik** | RoHS, WEEE |
+| **Reinigungsmittel** | CLP-VO, Biozid-VO |
+| **Schmierstoffe & Oele** | DIN 51502, ISO 6743 |
+| **Brandschutz & Loeschmittel** | DIN EN 3, ISO 7010 |
+| **Erste Hilfe & Verband** | DIN 13157, DIN 13169 |
+| **PSA & Arbeitsschutz** | EU-VO 2016/425 |
+| **Baustoffe & Klebstoffe** | DIN EN 197 |
+| **Sonstiges** | Benutzerdefiniert |
+
+---
+
+## Screenshots
 
 <details open>
-<summary><strong>🌙 Dunkler Modus</strong></summary>
+<summary><strong>Dunkler Modus</strong></summary>
 <br>
 <p align="center">
   <img src="public/screenshots/Screenshot_Dashboard_dunkel.jpg" width="250" alt="Dashboard Dunkel" />
   &nbsp;
-  <img src="public/screenshots/Screenshot_Vorräte_dunkel.jpg" width="250" alt="Vorräte Dunkel" />
+  <img src="public/screenshots/Screenshot_Vorräte_dunkel.jpg" width="250" alt="Inventar Dunkel" />
   &nbsp;
   <img src="public/screenshots/Screenshot_Produkt_detail_dunkel.jpg" width="250" alt="Produktdetail Dunkel" />
 </p>
 <p align="center">
-  <img src="public/screenshots/Screenshot_Produkt_hinzufügen_dunkel.jpg" width="250" alt="Produkt hinzufügen Dunkel" />
+  <img src="public/screenshots/Screenshot_Produkt_hinzufügen_dunkel.jpg" width="250" alt="Produkt hinzufuegen Dunkel" />
   &nbsp;
   <img src="public/screenshots/Screenshot_Scanner_dunkel.jpg" width="250" alt="Scanner Dunkel" />
   &nbsp;
@@ -391,17 +441,17 @@ PrepTrack ist eine **kostenlose, werbefreie, Offline-first Progressive Web App**
 </details>
 
 <details>
-<summary><strong>☀️ Heller Modus</strong></summary>
+<summary><strong>Heller Modus</strong></summary>
 <br>
 <p align="center">
   <img src="public/screenshots/Screenshot_Dashboard_hell.jpg" width="250" alt="Dashboard Hell" />
   &nbsp;
-  <img src="public/screenshots/Screenshot_Vorräte_hell.jpg" width="250" alt="Vorräte Hell" />
+  <img src="public/screenshots/Screenshot_Vorräte_hell.jpg" width="250" alt="Inventar Hell" />
   &nbsp;
   <img src="public/screenshots/Screenshot_Produkt_detail_hell.jpg" width="250" alt="Produktdetail Hell" />
 </p>
 <p align="center">
-  <img src="public/screenshots/Screenshot_Produkt_hinzufügen_hell.jpg" width="250" alt="Produkt hinzufügen Hell" />
+  <img src="public/screenshots/Screenshot_Produkt_hinzufügen_hell.jpg" width="250" alt="Produkt hinzufuegen Hell" />
   &nbsp;
   <img src="public/screenshots/Screenshot_Scanner_hell.jpg" width="250" alt="Scanner Hell" />
   &nbsp;
@@ -410,7 +460,7 @@ PrepTrack ist eine **kostenlose, werbefreie, Offline-first Progressive Web App**
 </details>
 
 <details>
-<summary><strong>🌐 Sprachumschalter (Englisch)</strong></summary>
+<summary><strong>Sprachumschalter (Mehrsprachig)</strong></summary>
 <br>
 <p align="center">
   <img src="public/screenshots/Screenshot_Einstellungen_hell_en.jpg" width="250" alt="Einstellungen Englisch Hell" />
@@ -421,12 +471,12 @@ PrepTrack ist eine **kostenlose, werbefreie, Offline-first Progressive Web App**
 
 ---
 
-## 🚀 Installation & Start
+## Installation & Start
 
 ```bash
 # Repository klonen
-git clone https://github.com/BEKO2210/Prepper_Log.git
-cd Prepper_Log
+git clone https://github.com/BEKO2210/MHD_INVENTOY.git
+cd MHD_INVENTOY
 
 # Dependencies installieren
 npm install
@@ -435,48 +485,44 @@ npm install
 npm run dev
 ```
 
-Die App ist dann unter `http://localhost:5173` verfügbar.
+Die App ist dann unter `http://localhost:5173` verfuegbar.
 
 ### Build & Tests
 
 ```bash
 npm run build      # Production Build (tsc + vite)
 npm run preview    # Build lokal testen
-npm run test       # Tests ausführen (Vitest, 59 Tests)
+npm run test       # Tests ausfuehren (Vitest, 59 Tests)
 npx tsc --noEmit   # Type-Check ohne Build
 ```
 
-### Deploy (GitHub Pages)
-
-1. Repository auf GitHub pushen
-2. Unter **Settings > Pages** die Source auf **GitHub Actions** setzen
-3. Bei jedem Push auf `main` wird automatisch deployed
-
 ---
 
-## 📲 PWA Installation
+## PWA Installation
+
+MHD-Inventar kann als native App auf Firmengeraeten installiert werden — ohne App Store:
 
 <table>
 <tr>
 <td width="33%">
 
 **Android (Chrome)**
-1. App im Browser öffnen
-2. Banner "Installieren" antippen oder Menü > "App installieren"
+1. App im Browser oeffnen
+2. Banner "Installieren" antippen oder Menue > "App installieren"
 
 </td>
 <td width="33%">
 
 **iOS (Safari)**
-1. App im Browser öffnen
+1. App im Browser oeffnen
 2. Teilen-Button antippen
-3. "Zum Home-Bildschirm" wählen
+3. "Zum Home-Bildschirm" waehlen
 
 </td>
 <td width="33%">
 
 **Desktop (Chrome/Edge)**
-1. App im Browser öffnen
+1. App im Browser oeffnen
 2. Installieren-Icon in der Adressleiste klicken
 
 </td>
@@ -485,41 +531,41 @@ npx tsc --noEmit   # Type-Check ohne Build
 
 ---
 
-## 🔒 Datenschutz
+## Datenschutz & Sicherheit
 
-- **Alle Daten lokal** auf deinem Gerät (IndexedDB). Keine Cloud. Keine Server. Keine Accounts.
-- **Kein Tracking.** Keine Analytics. Keine Cookies. Keine Werbung.
-- **Externer Dienst:** Nur die Open Food Facts API wird beim Barcode-Scan kontaktiert (Open Source, gemeinnützig). Es wird nur der Barcode übermittelt.
-- **Benachrichtigungen** werden lokal erzeugt. Keine Push-Tokens an externe Server.
-- **Volle Kontrolle:** Daten jederzeit exportieren/importieren. Löschen über Browser-Einstellungen.
-
----
-
-## ❤️ Unterstützen
-
-PrepTrack ist kostenlos und werbefrei. Wenn dir die App gefällt, kannst du die Entwicklung mit einer kleinen Spende unterstützen:
-
-<p align="center">
-  <a href="https://www.paypal.com/donate?business=renateweinfurtner%40gmx.de&currency_code=EUR&item_name=PrepTrack%20Spende">
-    <img src="https://img.shields.io/badge/Spenden-PayPal-0070ba?style=for-the-badge&logo=paypal&logoColor=white" alt="Mit PayPal spenden" />
-  </a>
-</p>
-
-Oder gib dem Projekt einfach einen ⭐ auf GitHub — das hilft enorm!
+- **Alle Daten lokal** auf dem Geraet (IndexedDB). Keine Cloud-Server. Keine Benutzerkonten. Keine Daten verlassen das Geraet.
+- **Kein Tracking.** Keine Analytics. Keine Cookies. Keine Werbung. Keine Datenweitergabe an Dritte.
+- **Externer Dienst:** Nur die Open Food Facts API wird beim Barcode-Scan kontaktiert (Open Source, gemeinnuetzig). Es wird nur die Barcode-Nummer uebermittelt.
+- **Benachrichtigungen** werden lokal auf dem Geraet erzeugt. Keine Push-Tokens an externe Server.
+- **Volle Datenhoheit:** Daten jederzeit exportieren/importieren. Loeschen ueber Browser-Einstellungen.
 
 ---
 
-## 👨‍💻 Entwicklung
+## Lizenzierung & Kontakt
 
-Dieses Projekt wurde mit Unterstützung von **Claude Code** (Anthropic, Modell: claude-opus-4-6) entwickelt.
+MHD-Inventar ist ein kommerzielles B2B-Produkt, lizenziert fuer Unternehmen und Organisationen.
 
-Das bedeutet nicht blindes Copy-Paste oder generierter Spaghetti-Code. Jede Funktion wurde durch gezielte Anweisungen gesteuert, jeder Bug wurde analysiert und systematisch behoben, jedes Feature wurde Schritt für Schritt implementiert und getestet. Der Mensch gibt die Richtung vor, die KI setzt um.
+Fuer Lizenzanfragen, Volumenpreise, individuelle Deployments oder Enterprise-Support kontaktieren Sie:
 
-> Siehe [CHANGELOG.md](CHANGELOG.md) für die vollständige Änderungshistorie.
+**Belkis Aslani**
+GitHub: [@BEKO2210](https://github.com/BEKO2210)
+Repository: [github.com/BEKO2210/MHD_INVENTOY](https://github.com/BEKO2210/MHD_INVENTOY)
+
+> Fuer Feature-Requests und Bug-Reports nutzen Sie bitte den [Issue-Tracker](https://github.com/BEKO2210/MHD_INVENTOY/issues).
 
 ---
 
-## 📄 Lizenz
+## Entwicklung
+
+Dieses Projekt wurde mit Unterstuetzung von **Claude Code** (Anthropic, Modell: claude-opus-4-6) entwickelt.
+
+Jede Funktion wurde durch gezielte Anweisungen gesteuert, jeder Bug wurde analysiert und systematisch behoben, jedes Feature wurde Schritt fuer Schritt implementiert und getestet. Der Mensch gibt die Richtung vor, die KI setzt um.
+
+> Siehe [CHANGELOG.md](CHANGELOG.md) fuer die vollstaendige Aenderungshistorie.
+
+---
+
+## Lizenz
 
 ```
 Copyright 2026 Belkis Aslani
@@ -531,10 +577,10 @@ You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
 ```
 
-Siehe [LICENSE](LICENSE) für den vollständigen Lizenztext.
+Siehe [LICENSE](LICENSE) fuer den vollstaendigen Lizenztext.
 
 ---
 
 <p align="center">
-  Made with ❤️ in Germany
+  Engineered in Germany
 </p>

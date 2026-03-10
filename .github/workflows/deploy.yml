@@ -1,4 +1,4 @@
-name: Deploy PrepTrack to GitHub Pages
+name: Deploy MHD-Inventar to GitHub Pages
 
 on:
   push:

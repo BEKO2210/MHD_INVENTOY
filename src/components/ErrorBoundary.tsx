@@ -19,7 +19,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.error('[PrepTrack] Unbehandelter Fehler:', error, info.componentStack);
+    console.error('[MHD-Inventar] Unbehandelter Fehler:', error, info.componentStack);
   }
 
   handleReset = () => {

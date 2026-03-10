@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const DARK_MODE_KEY = 'preptrack-dark-mode';
+const DARK_MODE_KEY = 'mhd-inventar-dark-mode';
 
 export function useDarkMode(): [boolean, () => void] {
   const [isDark, setIsDark] = useState(() => {

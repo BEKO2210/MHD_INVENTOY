@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to PrepTrack are documented here.
+All notable changes to MHD-Inventar are documented here.
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
@@ -12,7 +12,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **German (DE)**, **English (EN)**, **Portuguese (PT)**, and **Arabic (AR)** translations for all UI text
 - **Language switcher** in Settings with country flag icons and language codes
 - **Browser language detection** — automatically selects the user's preferred language
-- **Language persistence** via localStorage (`preptrack-language`)
+- **Language persistence** via localStorage (`mhd-inventar-language`)
 - **GitHub Issue Templates** — Bug Report, Feature Request, Question (YAML forms)
 - **Pull Request Template** with checklist
 - **CONTRIBUTING.md** — Contribution guidelines for developers
