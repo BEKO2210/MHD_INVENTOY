@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { getExpiryStatus, computeStats } from '../lib/utils';
-import type { ExpiryStatus, ProductCategory } from '../types';
+import { BUILTIN_CATEGORIES, CATEGORY_LABELS, type ProductCategory } from '../types';
+import type { ExpiryStatus } from '../types';
 import { BarChart3, TrendingUp, Package, Calendar } from 'lucide-react';
 
 export function Statistics() {
@@ -15,10 +16,12 @@ export function Statistics() {
     const s = computeStats(products);
     const activeProducts = products.filter((p) => !p.archived);
 
-    // Category breakdown
-    const catBreakdown = (['konserven', 'wasser', 'medizin', 'werkzeug', 'hygiene', 'lebensmittel', 'getranke', 'elektronik', 'kleidung', 'sonstiges'] as ProductCategory[]).map((key) => {
+    // Category breakdown - dynamic from actual product data
+    const usedCategories = [...new Set(activeProducts.map((p) => p.category))];
+    const catBreakdown = usedCategories.map((key) => {
       const count = activeProducts.filter((p) => p.category === key).length;
-      return { key, label: t(`categories.${key}`), count };
+      const label = BUILTIN_CATEGORIES.includes(key as ProductCategory) ? CATEGORY_LABELS[key as ProductCategory] : key;
+      return { key, label, count };
     }).filter((c) => c.count > 0).sort((a, b) => b.count - a.count);
 
     // Location breakdown

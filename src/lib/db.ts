@@ -7,6 +7,7 @@ import type {
   StorageLocation,
   ConsumptionLog,
   NotificationSchedule,
+  CustomCategory,
 } from '../types';
 
 export class MhdInventarDB extends Dexie {
@@ -14,6 +15,7 @@ export class MhdInventarDB extends Dexie {
   storageLocations!: Table<StorageLocation, number>;
   consumptionLogs!: Table<ConsumptionLog, number>;
   notificationSchedules!: Table<NotificationSchedule, number>;
+  customCategories!: Table<CustomCategory, number>;
 
   constructor() {
     super('MhdInventarDB');
@@ -32,6 +34,15 @@ export class MhdInventarDB extends Dexie {
       storageLocations: '++id, name',
       consumptionLogs: '++id, productId, consumedAt',
       notificationSchedules: '++id, productId, notifyAt, sent, [productId+daysBefore]',
+    });
+
+    this.version(3).stores({
+      products:
+        '++id, name, barcode, category, storageLocation, expiryDate, archived, createdAt',
+      storageLocations: '++id, name',
+      consumptionLogs: '++id, productId, consumedAt',
+      notificationSchedules: '++id, productId, notifyAt, sent, [productId+daysBefore]',
+      customCategories: '++id, name',
     });
   }
 }
@@ -106,6 +117,45 @@ export async function addStorageLocation(name: string): Promise<number> {
 
 export async function deleteStorageLocation(id: number): Promise<void> {
   await db.storageLocations.delete(id);
+}
+
+export async function renameStorageLocation(id: number, newName: string): Promise<void> {
+  const loc = await db.storageLocations.get(id);
+  if (!loc) return;
+  const oldName = loc.name;
+  await db.transaction('rw', db.storageLocations, db.products, async () => {
+    await db.storageLocations.update(id, { name: newName });
+    // Update all products referencing the old location name
+    const products = await db.products.where('storageLocation').equals(oldName).toArray();
+    for (const p of products) {
+      await db.products.update(p.id!, { storageLocation: newName, updatedAt: new Date().toISOString() });
+    }
+  });
+}
+
+// Custom Category CRUD
+export async function addCustomCategory(cat: Omit<CustomCategory, 'id'>): Promise<number> {
+  return db.customCategories.add(cat);
+}
+
+export async function updateCustomCategory(id: number, changes: Partial<CustomCategory>): Promise<void> {
+  const existing = await db.customCategories.get(id);
+  if (!existing) return;
+  const oldName = existing.name;
+  await db.transaction('rw', db.customCategories, db.products, async () => {
+    await db.customCategories.update(id, changes);
+    // If name changed, update all products referencing the old category name
+    if (changes.name && changes.name !== oldName) {
+      const products = await db.products.where('category').equals(oldName).toArray();
+      for (const p of products) {
+        await db.products.update(p.id!, { category: changes.name, updatedAt: new Date().toISOString() });
+      }
+    }
+  });
+}
+
+export async function deleteCustomCategory(id: number): Promise<void> {
+  await db.customCategories.delete(id);
 }
 
 // Consumption Log

@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrowserMultiFormatReader } from '@zxing/browser';
-import { useOnlineStatus } from '../hooks/useOnlineStatus';
 import { useAppStore } from '../store/useAppStore';
-import { lookupBarcode, formatDate, getDaysUntilExpiry, formatDaysUntil, getExpiryStatus, getStatusBadgeColor } from '../lib/utils';
+import { formatDate, getDaysUntilExpiry, formatDaysUntil, getExpiryStatus, getStatusBadgeColor } from '../lib/utils';
 import { db } from '../lib/db';
 import type { Product } from '../types';
 import {
@@ -17,13 +16,15 @@ import {
   Calendar,
   Layers,
   PlusCircle,
+  ArrowRight,
+  AlertTriangle,
 } from 'lucide-react';
 
 type ScanState =
   | { type: 'idle' }
   | { type: 'scanning' }
   | { type: 'loading'; barcode: string }
-  | { type: 'duplicate'; barcode: string; existing: Product[]; apiName?: string }
+  | { type: 'duplicate'; barcode: string; existing: Product[] }
   | { type: 'error'; message: string };
 
 function vibrate(pattern: number | number[]) {
@@ -39,9 +40,6 @@ export function BarcodeScanner() {
   const controlsRef = useRef<{ stop: () => void } | null>(null);
   const [state, setState] = useState<ScanState>({ type: 'idle' });
   const [cameraActive, setCameraActive] = useState(false);
-  const isOnline = useOnlineStatus();
-  const isOnlineRef = useRef(isOnline);
-  isOnlineRef.current = isOnline;
   const { navigateToAddWithScan } = useAppStore();
   const { t } = useTranslation();
 
@@ -93,28 +91,12 @@ export function BarcodeScanner() {
               .toArray();
 
             if (existing.length > 0) {
-              // Fetch API name in background for extra info
-              let apiName: string | undefined;
-              if (isOnlineRef.current) {
-                const apiResult = await lookupBarcode(barcode);
-                apiName = apiResult?.name;
-              }
-              setState({ type: 'duplicate', barcode, existing, apiName });
+              setState({ type: 'duplicate', barcode, existing });
               return;
             }
 
-            // No duplicate — look up online and go to form
-            if (!isOnlineRef.current) {
-              navigateToAddWithScan({ barcode });
-              return;
-            }
-
-            const product = await lookupBarcode(barcode);
-            navigateToAddWithScan({
-              barcode,
-              name: product?.name,
-              imageUrl: product?.imageUrl,
-            });
+            // No duplicate — go directly to form with barcode
+            navigateToAddWithScan({ barcode });
           }
         }
       );
@@ -202,7 +184,7 @@ export function BarcodeScanner() {
         </div>
       )}
 
-      {/* Duplicate found popup */}
+      {/* Duplicate found popup with FIFO hint */}
       {state.type === 'duplicate' && (
         <div className="space-y-3 rounded-xl border border-orange-500/30 bg-orange-500/5 p-4">
           <div className="flex items-center gap-2">
@@ -211,14 +193,16 @@ export function BarcodeScanner() {
               {t('scanner.duplicateFound')}
             </p>
           </div>
-          {state.apiName && (
-            <p className="text-sm text-gray-400">
-              Barcode: {state.barcode} &middot; {state.apiName}
-            </p>
-          )}
-          {!state.apiName && (
-            <p className="text-sm text-gray-400">Barcode: {state.barcode}</p>
-          )}
+          <p className="text-sm text-gray-400">Barcode: {state.barcode}</p>
+
+          {/* FIFO Hint */}
+          <div className="flex items-start gap-2 rounded-lg border border-yellow-500/30 bg-yellow-500/5 p-3">
+            <AlertTriangle size={18} className="mt-0.5 shrink-0 text-yellow-400" />
+            <div className="text-sm text-yellow-300">
+              <p className="font-semibold">{t('scanner.fifoTitle')}</p>
+              <p className="mt-1 text-yellow-400/80">{t('scanner.fifoHint')}</p>
+            </div>
+          </div>
 
           <div className="space-y-2">
             {state.existing.map((product) => {
@@ -269,13 +253,14 @@ export function BarcodeScanner() {
               onClick={() => {
                 navigateToAddWithScan({
                   barcode: state.barcode,
-                  name: state.apiName || state.existing[0]?.name,
+                  name: state.existing[0]?.name,
                 });
               }}
               className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-green-500 active:scale-[0.98] transition-transform"
             >
               <PlusCircle size={16} />
-              {t('scanner.addAnyway')}
+              {t('scanner.addNewLocation')}
+              <ArrowRight size={14} />
             </button>
             <button
               onClick={startCamera}

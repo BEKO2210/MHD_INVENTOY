@@ -11,7 +11,8 @@ import {
   getStatusBadgeColor,
   getLocale,
 } from '../lib/utils';
-import type { ProductCategory, Product } from '../types';
+import { BUILTIN_CATEGORIES, CATEGORY_LABELS } from '../types';
+import type { Product } from '../types';
 import {
   Search,
   Filter,
@@ -163,8 +164,8 @@ export function ProductList() {
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
             <select value={filters.category} onChange={(e) => setFilter('category', e.target.value)} className="rounded-lg border border-primary-600 bg-primary-900 px-3 py-2 text-sm text-gray-300">
               <option value="">{t('products.allCategories')}</option>
-              {(['konserven', 'wasser', 'medizin', 'werkzeug', 'hygiene', 'lebensmittel', 'getranke', 'elektronik', 'kleidung', 'sonstiges'] as ProductCategory[]).map((key) => (
-                <option key={key} value={key}>{t(`categories.${key}`)}</option>
+              {BUILTIN_CATEGORIES.map((key) => (
+                <option key={key} value={key}>{CATEGORY_LABELS[key]}</option>
               ))}
             </select>
             <select value={filters.location} onChange={(e) => setFilter('location', e.target.value)} className="rounded-lg border border-primary-600 bg-primary-900 px-3 py-2 text-sm text-gray-300">
