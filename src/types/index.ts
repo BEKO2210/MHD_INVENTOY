@@ -246,4 +246,5 @@ export interface ExportData {
   products: Product[];
   storageLocations: StorageLocation[];
   consumptionLogs: ConsumptionLog[];
+  customCategories: CustomCategory[];
 }

@@ -45,15 +45,17 @@ export function Dashboard() {
       .sort((a, b) => a.daysLeft - b.daysLeft)
       .slice(0, 8);
 
-    // Collect all unique categories from active products
-    const usedCategories = [...new Set(active.map((p) => p.category))];
-    const catBreakdown = usedCategories
-      .map((key) => ({
+    // Category breakdown — single pass O(n) instead of O(n*m)
+    const catCounts: Record<string, number> = {};
+    for (const p of active) {
+      catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+    }
+    const catBreakdown = Object.entries(catCounts)
+      .map(([key, count]) => ({
         key,
         label: BUILTIN_CATEGORIES.includes(key as ProductCategory) ? CATEGORY_LABELS[key as ProductCategory] : key,
-        count: active.filter((p) => p.category === key).length,
+        count,
       }))
-      .filter((c) => c.count > 0)
       .sort((a, b) => b.count - a.count)
       .slice(0, 4);
 

@@ -161,3 +161,38 @@ Vollständiger Code-Review aller Quelldateien. Folgende Fehler wurden gefunden u
 - formatDaysUntil / formatDuration (Randfälle: -730, -60, 0.5, 395, 730)
 - lookupBarcode (Whitespace, 13/14/15-stellig, Sonderzeichen)
 - getExpiryStatus ↔ getDaysUntilExpiry Konsistenz
+
+## Code-Review Änderungsprotokoll (Runde 3)
+
+Vollständiger Code-Review aller Quelldateien (Runde 3). Folgende Fehler wurden gefunden und behoben:
+
+### Behobene Fehler
+
+| # | Datei | Problem | Fix | Warum |
+|---|-------|---------|-----|-------|
+| 1 | `notifications.ts:97-99` | `break` blockiert ALLE Folge-Benachrichtigungen — stand bedingungslos außerhalb des `if(!sent)`-Blocks | `break` in den `if`-Block verschoben; bei bereits gesendeter Notification wird zum nächsten Schwellwert weitergeprüft | Nach Senden der 30-Tage-Notification matchte `daysLeft <= 30` bei jedem Folgechecker, fand die gesendete Notification, und brach ab. 14/7/3/1/0-Tage-Benachrichtigungen wurden NIE gesendet. Kernfunktionalität war defekt. |
+| 2 | `types/index.ts:243-249` | `ExportData` Interface fehlte `customCategories`-Feld | `customCategories: CustomCategory[]` hinzugefügt | `exportData()` exportiert customCategories seit Runde 2, aber der TypeScript-Typ definierte das Feld nicht — Type-Safety-Lücke |
+| 3 | `Settings.tsx:74-76` | `locationCounts` schloss archivierte Produkte aus, `categoryCounts` nicht — inkonsistent | `if (!p.archived)`-Filter für locationCounts entfernt | Lagerorte, die nur von archivierten Produkten referenziert werden, konnten fälschlicherweise gelöscht werden. Kategorien waren korrekt geschützt, Lagerorte nicht. |
+| 4 | `Statistics.tsx:21-25` + `Dashboard.tsx:49-55` | O(n×m) Kategorie-Zählung: `.filter()` in `.map()` — exakt gleiches Pattern wie Fix #8 aus Runde 2 | Vorberechnete Counts-Map (O(n) single pass) | Identisches Performance-Problem das in Settings.tsx (Runde 2) behoben wurde, existierte noch in Statistics.tsx und Dashboard.tsx |
+
+### Bestätigt fehlerfrei (Runde 3, kein Fix nötig)
+
+- **useAppStore**: getInitialPage(), setPage(), setEditingProductId() — Navigation und State-Transitions korrekt
+- **db.ts**: seedDefaults, CRUD-Ops, renameStorageLocation (Transaktion), Import/Export mit customCategories — alles korrekt
+- **utils.ts**: getExpiryStatus/getDaysUntilExpiry konsistent, formatDaysUntil/formatDuration Grenzwerte, compressImage Limits, lookupBarcode Regex
+- **ProductForm.tsx**: Form-Draft-Persist, minStock=0 Handling (Runde 2 Fix #7 korrekt), Kamera-Button deaktiviert, Custom-Category Unit-Default
+- **ProductList.tsx**: Filter, ConsumeModal, DetailModal mit Live-Countdown — korrekt
+- **BarcodeScanner.tsx**: Kamera-Lifecycle, Duplikat-Check, track-Variable (Runde 2 Fix #5) — korrekt
+- **Navigation.tsx**: aria-labels, aria-current, setEditingProductId(null) bei Add-Klick — korrekt
+- **StatRing.tsx**: SVG-Math, progress-Clamping — korrekt
+- **ErrorBoundary.tsx**: getDerivedStateFromError + componentDidCatch + Reset-Logik — korrekt
+- **OfflineBanner.tsx / PWAInstallPrompt.tsx**: AnimatePresence-Lifecycle, iOS-Detection — korrekt
+- **Hooks** (useDarkMode, useOnlineStatus, usePWAInstall): Event-Listener Cleanup, localStorage-Persist, globalDeferredPrompt — korrekt
+- **i18n.ts**: RTL-Support, LanguageDetector-Config, updateDirection — korrekt
+- **sw-handler.ts**: controllerchange mit Refresh-Guard, updatefound — korrekt
+- **vite.config.ts**: PWA-Config, Font-Caching, GitHub Pages base — korrekt
+- **Translation Keys**: Alle 4 Sprachen synchron (de, en, pt, ar)
+
+### Teststatus
+
+113 Tests bestanden, TypeScript kompiliert fehlerfrei (`tsc --noEmit`), Production Build erfolgreich.
