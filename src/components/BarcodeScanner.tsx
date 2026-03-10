@@ -35,7 +35,6 @@ function vibrate(pattern: number | number[]) {
 
 export function BarcodeScanner() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const readerRef = useRef<BrowserMultiFormatReader | null>(null);
   const processedRef = useRef(false);
   const controlsRef = useRef<{ stop: () => void } | null>(null);
   const [state, setState] = useState<ScanState>({ type: 'idle' });
@@ -60,7 +59,6 @@ export function BarcodeScanner() {
       processedRef.current = false;
       setState({ type: 'scanning' });
       const reader = new BrowserMultiFormatReader();
-      readerRef.current = reader;
 
       const constraints: MediaStreamConstraints = {
         video: { facingMode: 'environment' },

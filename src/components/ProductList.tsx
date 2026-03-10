@@ -11,7 +11,7 @@ import {
   getStatusBadgeColor,
   getLocale,
 } from '../lib/utils';
-import { BUILTIN_CATEGORIES, CATEGORY_LABELS } from '../types';
+import { BUILTIN_CATEGORIES, CATEGORY_LABELS, getCategoryLabel } from '../types';
 import type { Product } from '../types';
 import {
   Search,
@@ -56,6 +56,7 @@ export function ProductList() {
 
   const products = useLiveQuery(() => db.products.toArray()) ?? [];
   const locations = useLiveQuery(() => db.storageLocations.toArray()) ?? [];
+  const customCategories = useLiveQuery(() => db.customCategories.toArray()) ?? [];
 
   const filtered = useMemo(() => products
     .filter((p) => p.archived === showArchived)
@@ -167,6 +168,9 @@ export function ProductList() {
               {BUILTIN_CATEGORIES.map((key) => (
                 <option key={key} value={key}>{CATEGORY_LABELS[key]}</option>
               ))}
+              {customCategories.map((cat) => (
+                <option key={`custom-${cat.id}`} value={cat.name}>{cat.name}</option>
+              ))}
             </select>
             <select value={filters.location} onChange={(e) => setFilter('location', e.target.value)} className="rounded-lg border border-primary-600 bg-primary-900 px-3 py-2 text-sm text-gray-300">
               <option value="">{t('products.allLocations')}</option>
@@ -207,7 +211,7 @@ export function ProductList() {
                   <div className="min-w-0">
                     <p className="truncate font-medium text-gray-200">{product.name}</p>
                     <p className="text-xs text-gray-400">
-                      {t(`categories.${product.category}`)} &middot; {product.storageLocation}
+                      {getCategoryLabel(product.category)} &middot; {product.storageLocation}
                     </p>
                   </div>
                   <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold ${getStatusBadgeColor(product.status)}`}>
@@ -420,7 +424,7 @@ function ProductDetailModal({ productId, products, onClose }: { productId: numbe
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <DetailItem icon={<Tag size={16} />} label={t('detail.category')} value={t(`categories.${product.category}`)} />
+            <DetailItem icon={<Tag size={16} />} label={t('detail.category')} value={getCategoryLabel(product.category)} />
             <DetailItem icon={<MapPin size={16} />} label={t('detail.location')} value={product.storageLocation} />
             <DetailItem icon={<Layers size={16} />} label={t('detail.quantity')} value={`${product.quantity} ${product.unit}`} />
             <DetailItem icon={<Calendar size={16} />} label={t('detail.expiryDate')} value={formatDate(product.expiryDate, product.expiryPrecision)} />
