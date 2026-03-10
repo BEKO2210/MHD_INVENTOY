@@ -110,5 +110,5 @@ export function startNotificationChecker(): ReturnType<typeof setInterval> {
     checkAndNotifyExpiringProducts().catch((err) =>
       console.error('[MHD-Inventar] Benachrichtigungsprüfung fehlgeschlagen:', err)
     );
-  }, 1000 * 60 * 60);
+  }, 1000 * 60 * 60 * 6); // 6 Stunden
 }

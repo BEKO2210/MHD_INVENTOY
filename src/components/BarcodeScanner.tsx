@@ -47,7 +47,7 @@ export function BarcodeScanner() {
     controlsRef.current = null;
     if (videoRef.current?.srcObject) {
       const stream = videoRef.current.srcObject as MediaStream;
-      stream.getTracks().forEach((t) => t.stop());
+      stream.getTracks().forEach((track) => track.stop());
       videoRef.current.srcObject = null;
     }
     setCameraActive(false);

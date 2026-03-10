@@ -168,10 +168,11 @@ export async function logConsumption(
 
 // Export/Import
 export async function exportData(): Promise<string> {
-  const [products, storageLocations, consumptionLogs] = await Promise.all([
+  const [products, storageLocations, consumptionLogs, customCategories] = await Promise.all([
     db.products.toArray(),
     db.storageLocations.toArray(),
     db.consumptionLogs.toArray(),
+    db.customCategories.toArray(),
   ]);
 
   // Strip photo data from export to keep file size manageable
@@ -186,6 +187,7 @@ export async function exportData(): Promise<string> {
     products: productsWithoutPhotos,
     storageLocations,
     consumptionLogs,
+    customCategories,
   };
 
   return JSON.stringify(data, null, 2);
@@ -269,6 +271,7 @@ export async function importData(jsonString: string): Promise<number> {
   const products = data.products as Record<string, unknown>[];
   const storageLocations = (data.storageLocations ?? []) as Record<string, unknown>[];
   const consumptionLogs = (data.consumptionLogs ?? []) as Record<string, unknown>[];
+  const customCategories = (data.customCategories ?? []) as Record<string, unknown>[];
 
   let imported = 0;
   let skipped = 0;
@@ -278,6 +281,7 @@ export async function importData(jsonString: string): Promise<number> {
     db.products,
     db.storageLocations,
     db.consumptionLogs,
+    db.customCategories,
     async () => {
       // Import storage locations (skip duplicates)
       for (const loc of storageLocations) {
@@ -333,7 +337,7 @@ export async function importData(jsonString: string): Promise<number> {
           name: String(product.name),
           barcode: typeof product.barcode === 'string' ? product.barcode : undefined,
           category: typeof product.category === 'string' ? product.category as Product['category'] : 'sonstiges',
-          storageLocation: typeof product.storageLocation === 'string' ? product.storageLocation : 'Keller',
+          storageLocation: typeof product.storageLocation === 'string' ? product.storageLocation : 'Lager',
           quantity: typeof product.quantity === 'number' ? product.quantity : 1,
           unit: typeof product.unit === 'string' ? product.unit : 'Stück',
           expiryDate: String(product.expiryDate),
@@ -346,6 +350,23 @@ export async function importData(jsonString: string): Promise<number> {
           updatedAt: typeof product.updatedAt === 'string' ? product.updatedAt : now,
         });
         imported++;
+      }
+
+      // Import custom categories (skip duplicates)
+      for (const cat of customCategories) {
+        if (!cat.name || typeof cat.name !== 'string') continue;
+        const existing = await db.customCategories
+          .where('name')
+          .equals(cat.name)
+          .first();
+        if (!existing) {
+          await db.customCategories.add({
+            name: cat.name,
+            defaultUnit: typeof cat.defaultUnit === 'string' ? cat.defaultUnit : 'Stück',
+            consumptionStep: typeof cat.consumptionStep === 'number' ? cat.consumptionStep : 1,
+            createdAt: (cat.createdAt as string) || new Date().toISOString(),
+          });
+        }
       }
 
       // Import consumption logs

@@ -19,29 +19,6 @@ export default defineConfig({
         navigateFallback: 'index.html',
         runtimeCaching: [
           {
-            urlPattern: /^https:\/\/world\.openfoodfacts\.org\/api\//,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'openfoodfacts-api',
-              expiration: {
-                maxEntries: 200,
-                maxAgeSeconds: 60 * 60 * 24 * 7,
-              },
-              networkTimeoutSeconds: 5,
-            },
-          },
-          {
-            urlPattern: /^https:\/\/images\.openfoodfacts\.org\//,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'openfoodfacts-images',
-              expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 30,
-              },
-            },
-          },
-          {
             urlPattern: /^https:\/\/fonts\.bunny\.net\//,
             handler: 'CacheFirst',
             options: {
