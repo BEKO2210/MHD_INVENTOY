@@ -1,4 +1,4 @@
-# PrepTrack — Code Review Report
+# MHD-Inventar — Code Review Report
 Datum: 2026-03-08
 Reviewer: Automatisiertes 5-köpfiges Senior Review-Team
 
@@ -105,5 +105,5 @@ Reviewer: Automatisiertes 5-köpfiges Senior Review-Team
 
 ---
 
-*PrepTrack Code Review Report v1.0 — Automatisiertes Review, 2026-03-08*
+*MHD-Inventar Code Review Report v1.0 — Automatisiertes Review, 2026-03-08*
 *"Es geht hier um Leben und Tod — dann prüfen wir das auch so."*

@@ -30,8 +30,8 @@ interface AppState {
   setNotificationsEnabled: (enabled: boolean) => void;
 }
 
-const NOTIF_KEY = 'preptrack-notifications-enabled';
-const FORM_STORAGE_KEY = 'preptrack-form-draft';
+const NOTIF_KEY = 'mhd-inventar-notifications-enabled';
+const FORM_STORAGE_KEY = 'mhd-inventar-form-draft';
 
 function getStoredNotifications(): boolean {
   try {

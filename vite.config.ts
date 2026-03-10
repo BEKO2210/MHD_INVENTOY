@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  base: process.env.GITHUB_PAGES ? '/Prepper_Log/' : './',
+  base: process.env.GITHUB_PAGES ? '/MHD_INVENTOY/' : './',
   plugins: [
     react(),
     VitePWA({
@@ -54,9 +54,9 @@ export default defineConfig({
         ],
       },
       manifest: {
-        name: 'PrepTrack — Dein Vorrat. Immer im Blick.',
-        short_name: 'PrepTrack',
-        description: 'Offline-first PWA für Prepper und Vorratshaltung. Produkte scannen, MHD tracken, Benachrichtigungen erhalten.',
+        name: 'MHD-Inventar — Fristen im Griff. Bestände im Blick.',
+        short_name: 'MHD-Inventar',
+        description: 'Professionelle MHD-Inventarverwaltung. Artikel erfassen, Ablaufdaten tracken, ISO/DIN-konform benachrichtigt werden.',
         theme_color: '#1a3a2a',
         background_color: '#0f1f17',
         display: 'standalone',
@@ -64,7 +64,7 @@ export default defineConfig({
         scope: './',
         start_url: './',
         lang: 'de',
-        categories: ['utilities', 'lifestyle', 'food'],
+        categories: ['utilities', 'business', 'productivity'],
         icons: [
           {
             src: 'icons/icon-48x48.png',

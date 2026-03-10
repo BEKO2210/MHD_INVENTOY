@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://beko2210.github.io/Prepper_Log/sitemap.xml
+Sitemap: https://beko2210.github.io/MHD_INVENTOY/sitemap.xml

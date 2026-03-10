@@ -9,14 +9,14 @@ import type {
   NotificationSchedule,
 } from '../types';
 
-export class PrepTrackDB extends Dexie {
+export class MhdInventarDB extends Dexie {
   products!: Table<Product, number>;
   storageLocations!: Table<StorageLocation, number>;
   consumptionLogs!: Table<ConsumptionLog, number>;
   notificationSchedules!: Table<NotificationSchedule, number>;
 
   constructor() {
-    super('PrepTrackDB');
+    super('MhdInventarDB');
 
     this.version(1).stores({
       products:
@@ -36,7 +36,7 @@ export class PrepTrackDB extends Dexie {
   }
 }
 
-export const db = new PrepTrackDB();
+export const db = new MhdInventarDB();
 
 // Seed default storage locations on first run
 export async function seedDefaults(): Promise<void> {
@@ -44,14 +44,16 @@ export async function seedDefaults(): Promise<void> {
   if (count === 0) {
     const now = new Date().toISOString();
     await db.storageLocations.bulkAdd([
-      { name: 'Keller', createdAt: now },
-      { name: 'Garage', createdAt: now },
-      { name: 'Küche', createdAt: now },
-      { name: 'Dachboden', createdAt: now },
-      { name: 'Vorratsraum', createdAt: now },
-      { name: 'Bunker', createdAt: now },
-      { name: 'Auto', createdAt: now },
-      { name: 'Gartenhaus', createdAt: now },
+      { name: 'Lager', createdAt: now },
+      { name: 'Kühlraum', createdAt: now },
+      { name: 'Gefahrstofflager', createdAt: now },
+      { name: 'Werkstatt', createdAt: now },
+      { name: 'Büro', createdAt: now },
+      { name: 'Außenlager', createdAt: now },
+      { name: 'Regal A', createdAt: now },
+      { name: 'Regal B', createdAt: now },
+      { name: 'Hochregallager', createdAt: now },
+      { name: 'Versand', createdAt: now },
     ]);
   }
 }

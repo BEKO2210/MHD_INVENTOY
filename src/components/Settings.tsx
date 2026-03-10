@@ -70,12 +70,12 @@ export function Settings() {
 
   async function handleExportJSON() {
     const data = await exportData();
-    downloadFile(data, `preptrack-backup-${new Date().toISOString().split('T')[0]}.json`, 'application/json');
+    downloadFile(data, `mhd-inventar-backup-${new Date().toISOString().split('T')[0]}.json`, 'application/json');
   }
 
   async function handleExportCSV() {
     const data = await exportCSV();
-    downloadFile(data, `preptrack-export-${new Date().toISOString().split('T')[0]}.csv`, 'text/csv;charset=utf-8');
+    downloadFile(data, `mhd-inventar-export-${new Date().toISOString().split('T')[0]}.csv`, 'text/csv;charset=utf-8');
   }
 
   async function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
@@ -375,27 +375,15 @@ export function Settings() {
         </div>
       </section>
 
-      {/* Spenden */}
-      <section className="rounded-xl border border-pink-500/20 bg-pink-500/5 p-4">
+      {/* Support */}
+      <section className="rounded-xl border border-primary-700 bg-primary-800/60 p-4">
         <h3 className="mb-3 flex items-center gap-2 font-semibold text-gray-200">
           <Heart size={18} className="text-pink-400" />
           {t('settings.support')}
         </h3>
         <p className="mb-3 text-sm text-gray-400">
-          {t('settings.supportDesc')}
+          Support kontaktieren
         </p>
-        <a
-          href="https://www.paypal.com/donate?business=renateweinfurtner%40gmx.de&currency_code=EUR&item_name=PrepTrack%20Spende"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#0070ba] px-4 py-3 font-medium text-white hover:bg-[#005ea6] active:scale-[0.98] transition-transform"
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.774.774 0 0 1 .763-.658h6.568c2.183 0 3.678.568 4.44 1.69.357.526.563 1.105.613 1.72.053.66-.01 1.443-.19 2.39l-.007.038v.338l.263.149c.224.116.402.253.539.412.227.265.374.593.435.976.064.396.044.866-.058 1.397-.116.607-.304 1.136-.56 1.574a3.305 3.305 0 0 1-.887.99 3.547 3.547 0 0 1-1.214.592c-.46.137-.98.206-1.55.206H13.44a.907.907 0 0 0-.607.233.927.927 0 0 0-.313.579l-.034.195-.563 3.574-.025.14a.082.082 0 0 1-.026.055.078.078 0 0 1-.05.018H7.076Z" />
-          </svg>
-          {t('settings.donatePayPal')}
-        </a>
-        <p className="mt-2 text-center text-xs text-gray-400">renateweinfurtner@gmx.de</p>
       </section>
 
       {/* Impressum */}
@@ -520,7 +508,7 @@ export function Settings() {
 
       {/* App Info */}
       <section className="space-y-1 text-center text-xs text-gray-400">
-        <p>PrepTrack v{appVersion}</p>
+        <p>MHD-Inventar v{appVersion}</p>
         <p>{t('settings.appSlogan')}</p>
         <p>&copy; {new Date().getFullYear()} Belkis Aslani</p>
       </section>

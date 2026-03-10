@@ -1,4 +1,4 @@
-// Service Worker event handlers for PrepTrack PWA
+// Service Worker event handlers for MHD-Inventar PWA
 // This file handles SW registration feedback in the main thread
 
 export function registerSWEventHandlers(): void {
@@ -15,7 +15,7 @@ export function registerSWEventHandlers(): void {
             navigator.serviceWorker.controller
           ) {
             // New service worker installed while old one still controls — update available
-            console.log('[PrepTrack] Neues Update verfügbar.');
+            console.log('[MHD-Inventar] Neues Update verfügbar.');
           }
         });
       });
@@ -29,7 +29,7 @@ export function registerSWEventHandlers(): void {
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (refreshing) return;
       refreshing = true;
-      console.log('[PrepTrack] Service Worker aktualisiert. Seite wird neu geladen.');
+      console.log('[MHD-Inventar] Service Worker aktualisiert. Seite wird neu geladen.');
       window.location.reload();
     });
   }

@@ -1,6 +1,6 @@
-# Contributing to PrepTrack
+# Contributing to MHD-Inventar
 
-First off, thank you for considering contributing to PrepTrack! Every contribution helps make the app better for everyone.
+First off, thank you for considering contributing to MHD-Inventar! Every contribution helps make the app better for everyone.
 
 ## Table of Contents
 
@@ -20,13 +20,13 @@ This project adheres to the [Code of Conduct](CODE_OF_CONDUCT.md). By participat
 
 ### Reporting Bugs
 
-- Use the [Bug Report](https://github.com/BEKO2210/Prepper_Log/issues/new?template=bug_report.yml) issue template
+- Use the [Bug Report](https://github.com/BEKO2210/MHD_INVENTOY/issues/new?template=bug_report.yml) issue template
 - Include screenshots if possible
 - Mention your device, browser, and whether the app is installed as PWA
 
 ### Suggesting Features
 
-- Use the [Feature Request](https://github.com/BEKO2210/Prepper_Log/issues/new?template=feature_request.yml) issue template
+- Use the [Feature Request](https://github.com/BEKO2210/MHD_INVENTOY/issues/new?template=feature_request.yml) issue template
 - Explain the problem your feature solves
 - Include mockups if applicable
 
@@ -42,8 +42,8 @@ This project adheres to the [Code of Conduct](CODE_OF_CONDUCT.md). By participat
 
 ```bash
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/Prepper_Log.git
-cd Prepper_Log
+git clone https://github.com/YOUR_USERNAME/MHD_INVENTOY.git
+cd MHD_INVENTOY
 
 # Install dependencies
 npm install
@@ -63,7 +63,7 @@ npm run build
 
 ## Project Architecture
 
-PrepTrack is an offline-first PWA built with:
+MHD-Inventar is an offline-first PWA built with:
 
 - **React 18 + TypeScript** — UI framework
 - **Vite 6** — Build tool

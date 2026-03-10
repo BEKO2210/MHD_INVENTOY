@@ -1,10 +1,11 @@
-# CLAUDE.md — PrepTrack Projektkontext
+# CLAUDE.md — MHD-Inventar Projektkontext
 
 ## Projekt
 
-PrepTrack — Offline-first PWA zur Vorratsverwaltung.
+MHD-Inventar — Professionelle Offline-first PWA zur B2B-Bestandsverwaltung mit Fokus auf Mindesthaltbarkeitsdaten.
+"Fristen im Griff. Bestände im Blick."
 React 18 + TypeScript, Vite 6, Tailwind CSS 3, Zustand, Dexie.js (IndexedDB).
-Sprachen: Deutsch (de), Englisch (en), Portugiesisch (pt), Arabisch (ar). Lizenz: Apache 2.0.
+Sprachen: Deutsch (de), Englisch (en), Portugiesisch (pt), Arabisch (ar). Lizenz: Apache 2.0. Version: 2.0.0.
 
 ## Befehle
 
@@ -53,7 +54,7 @@ src/
 
 ## Datenbank (Dexie.js / IndexedDB)
 
-DB-Name: `PrepTrackDB`, aktuell Version 2.
+DB-Name: `MhdInventarDB`, aktuell Version 2.
 
 ```
 products:           ++id, name, barcode, category, storageLocation, expiryDate, archived, createdAt
@@ -64,9 +65,13 @@ notificationSchedules: ++id, productId, notifyAt, sent, [productId+daysBefore]
 
 Product-Felder: `id?, name, barcode?, category, storageLocation, quantity, unit, expiryDate, expiryPrecision, photo?, minStock?, notes?, archived, createdAt, updatedAt`
 
-10 Kategorien: konserven, wasser, medizin, werkzeug, hygiene, lebensmittel, getranke, elektronik, kleidung, sonstiges
-10 Einheiten: Stück, Liter, kg, g, ml, Packung, Dose, Flasche, Karton, Palette
-8 Standard-Lagerorte: Keller, Garage, Küche, Dachboden, Vorratsraum, Bunker, Auto, Gartenhaus
+15 Kategorien: lebensmittel, getranke, medizin, kosmetik, chemie, automotive, batterien, elektronik, reinigung, schmierstoffe, feuerschutz, erste_hilfe, arbeitsschutz, baustoffe, sonstiges
+16 Einheiten: Stück, Liter, kg, g, ml, Packung, Dose, Flasche, Karton, Palette, Kanister, Tube, Satz, Paar, Rolle, Meter
+10 Standard-Lagerorte: Lager, Kühlraum, Gefahrstofflager, Werkstatt, Büro, Außenlager, Regal A, Regal B, Hochregallager, Versand
+
+## ISO/DIN Normhinweise
+
+`CATEGORY_ISO_NORMS` ordnet jeder Kategorie relevante ISO/DIN-Normen zu und zeigt diese als Warnhinweise im Produktformular an (z. B. Gefahrstofflagerung nach TRGS, Medizinprodukte nach DIN EN ISO 13485). Dies unterstützt die normkonforme Bestandsführung im professionellen Umfeld.
 
 ## State Management
 
@@ -76,6 +81,8 @@ Product-Felder: `id?, name, barcode?, category, storageLocation, quantity, unit,
 - `editingProductId` / `setEditingProductId(id)` — Bearbeitung (setzt Page auf 'add')
 - `scannedData` / `navigateToAddWithScan(data)` — Scanner → Formular
 - `notificationsEnabled` / `setNotificationsEnabled(enabled)` — localStorage-persistent
+
+localStorage-Prefix: `mhd-inventar-` (z. B. `mhd-inventar-darkMode`, `mhd-inventar-notifications`).
 
 Beim App-Start: `getInitialPage()` prüft sessionStorage auf Form-Draft (Kamera-Reload-Fix).
 
@@ -92,7 +99,7 @@ Beim App-Start: `getInitialPage()` prüft sessionStorage auf Form-Draft (Kamera-
 
 ## Build & Deploy
 
-- Vite base: `./` lokal, `/Prepper_Log/` für GitHub Pages (`GITHUB_PAGES` env var)
+- Vite base: `./` lokal, `/MHD_INVENTOY/` für GitHub Pages (`GITHUB_PAGES` env var)
 - PWA: `vite-plugin-pwa` mit autoUpdate, Workbox für API/Font/Image Caching
 - CI/CD: `.github/workflows/deploy.yml` — Push auf main → Build + Test + Deploy auf GitHub Pages
 - Tailwind: Custom primary/olive/khaki Palette, Fonts: Inter, Bebas Neue, JetBrains Mono

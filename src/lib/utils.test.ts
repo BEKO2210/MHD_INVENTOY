@@ -13,8 +13,8 @@ function makeProduct(overrides: Partial<Product> = {}): Product {
     id: 1,
     name: 'Testprodukt',
     barcode: '',
-    category: 'konserven',
-    storageLocation: 'Keller',
+    category: 'lebensmittel',
+    storageLocation: 'Lager',
     quantity: 5,
     unit: 'Stück',
     expiryDate: new Date(Date.now() + 90 * 86_400_000).toISOString(),
@@ -213,9 +213,9 @@ describe('computeStats', () => {
 
   it('counts categories and locations correctly', () => {
     const products = [
-      makeProduct({ id: 1, category: 'wasser', storageLocation: 'Keller' }),
-      makeProduct({ id: 2, category: 'medizin', storageLocation: 'Garage' }),
-      makeProduct({ id: 3, category: 'wasser', storageLocation: 'Keller' }),
+      makeProduct({ id: 1, category: 'getranke', storageLocation: 'Lager' }),
+      makeProduct({ id: 2, category: 'medizin', storageLocation: 'Werkstatt' }),
+      makeProduct({ id: 3, category: 'getranke', storageLocation: 'Lager' }),
     ];
     const stats = computeStats(products);
     expect(stats.totalProducts).toBe(3);
