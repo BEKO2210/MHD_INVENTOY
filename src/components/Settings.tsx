@@ -71,9 +71,7 @@ export function Settings() {
     const locCounts: Record<string, number> = {};
     for (const p of allProducts) {
       catCounts[p.category] = (catCounts[p.category] || 0) + 1;
-      if (!p.archived) {
-        locCounts[p.storageLocation] = (locCounts[p.storageLocation] || 0) + 1;
-      }
+      locCounts[p.storageLocation] = (locCounts[p.storageLocation] || 0) + 1;
     }
     return { categoryCounts: catCounts, locationCounts: locCounts };
   }, [allProducts]);

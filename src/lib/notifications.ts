@@ -94,9 +94,10 @@ export async function checkAndNotifyExpiringProducts(): Promise<void> {
               sent: true,
             });
           }
+          // Only send one new notification per product per checker run
+          break;
         }
-        // Only fire the highest matching threshold per product
-        break;
+        // This threshold was already sent — continue to check next lower threshold
       }
     }
   }

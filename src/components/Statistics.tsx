@@ -16,13 +16,15 @@ export function Statistics() {
     const s = computeStats(products);
     const activeProducts = products.filter((p) => !p.archived);
 
-    // Category breakdown - dynamic from actual product data
-    const usedCategories = [...new Set(activeProducts.map((p) => p.category))];
-    const catBreakdown = usedCategories.map((key) => {
-      const count = activeProducts.filter((p) => p.category === key).length;
+    // Category breakdown - single pass O(n) instead of O(n*m)
+    const catCounts: Record<string, number> = {};
+    for (const p of activeProducts) {
+      catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+    }
+    const catBreakdown = Object.entries(catCounts).map(([key, count]) => {
       const label = BUILTIN_CATEGORIES.includes(key as ProductCategory) ? CATEGORY_LABELS[key as ProductCategory] : key;
       return { key, label, count };
-    }).filter((c) => c.count > 0).sort((a, b) => b.count - a.count);
+    }).sort((a, b) => b.count - a.count);
 
     // Location breakdown
     const locCounts = activeProducts.reduce<Record<string, number>>((acc, p) => {
