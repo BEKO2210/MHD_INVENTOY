@@ -4,7 +4,7 @@ export interface Product {
   id?: number;
   name: string;
   barcode?: string;
-  category: ProductCategory;
+  category: string; // ProductCategory or custom category name
   storageLocation: string;
   quantity: number;
   unit: string;
@@ -137,6 +137,20 @@ export const CATEGORY_ISO_NORMS: Record<ProductCategory, { norms: string[]; warn
     warnings: ['Herstellerangaben zur Haltbarkeit und Lagerung beachten'],
   },
 };
+
+export const BUILTIN_CATEGORIES: ProductCategory[] = [
+  'lebensmittel', 'getranke', 'medizin', 'kosmetik', 'chemie',
+  'automotive', 'batterien', 'elektronik', 'reinigung', 'schmierstoffe',
+  'feuerschutz', 'erste_hilfe', 'arbeitsschutz', 'baustoffe', 'sonstiges',
+];
+
+export interface CustomCategory {
+  id?: number;
+  name: string;
+  defaultUnit: string;
+  consumptionStep: number; // How much is deducted per "take" (e.g. 1 Stück, 0.5 Liter)
+  createdAt: string;
+}
 
 export const DEFAULT_UNITS = [
   'Stück',

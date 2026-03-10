@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { version as appVersion } from '../../package.json';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { db, addStorageLocation, deleteStorageLocation, exportData, exportCSV, importData, ImportResult } from '../lib/db';
+import { db, addStorageLocation, deleteStorageLocation, renameStorageLocation, exportData, exportCSV, importData, ImportResult, addCustomCategory, updateCustomCategory, deleteCustomCategory } from '../lib/db';
 import { requestNotificationPermission, getNotificationPermissionStatus } from '../lib/notifications';
 import { useDarkMode } from '../hooks/useDarkMode';
 import { usePWAInstall } from '../hooks/usePWAInstall';
 import { useAppStore } from '../store/useAppStore';
 import { downloadFile } from '../lib/utils';
+import { DEFAULT_UNITS } from '../types';
 import {
   Bell,
   BellOff,
@@ -28,6 +29,10 @@ import {
   ChevronUp,
   Info,
   Globe,
+  Pencil,
+  Check,
+  X,
+  Tag,
 } from 'lucide-react';
 
 const LANGUAGES = [
@@ -43,7 +48,17 @@ export function Settings() {
   const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
   const locations = useLiveQuery(() => db.storageLocations.toArray()) ?? [];
   const allProducts = useLiveQuery(() => db.products.toArray()) ?? [];
+  const customCategories = useLiveQuery(() => db.customCategories.toArray()) ?? [];
   const [newLocation, setNewLocation] = useState('');
+  const [editingLocId, setEditingLocId] = useState<number | null>(null);
+  const [editingLocName, setEditingLocName] = useState('');
+  const [newCatName, setNewCatName] = useState('');
+  const [newCatUnit, setNewCatUnit] = useState('Stück');
+  const [newCatStep, setNewCatStep] = useState('1');
+  const [editingCatId, setEditingCatId] = useState<number | null>(null);
+  const [editingCatName, setEditingCatName] = useState('');
+  const [editingCatUnit, setEditingCatUnit] = useState('');
+  const [editingCatStep, setEditingCatStep] = useState('');
   const [importStatus, setImportStatus] = useState<{ message: string; type: 'success' | 'warning' | 'error' } | null>(null);
   const [showImpressum, setShowImpressum] = useState(false);
   const [showDatenschutz, setShowDatenschutz] = useState(false);
@@ -66,6 +81,54 @@ export function Settings() {
     if (exists) return;
     await addStorageLocation(name);
     setNewLocation('');
+  }
+
+  function startEditLocation(id: number, currentName: string) {
+    setEditingLocId(id);
+    setEditingLocName(currentName);
+  }
+
+  async function handleSaveLocationRename() {
+    if (!editingLocId || !editingLocName.trim()) return;
+    const newName = editingLocName.trim();
+    const exists = locations.some((l) => l.id !== editingLocId && l.name.toLowerCase() === newName.toLowerCase());
+    if (exists) return;
+    await renameStorageLocation(editingLocId, newName);
+    setEditingLocId(null);
+    setEditingLocName('');
+  }
+
+  async function handleAddCategory() {
+    const name = newCatName.trim();
+    if (!name) return;
+    const exists = customCategories.some((c) => c.name.toLowerCase() === name.toLowerCase());
+    if (exists) return;
+    await addCustomCategory({
+      name,
+      defaultUnit: newCatUnit,
+      consumptionStep: parseFloat(newCatStep) || 1,
+      createdAt: new Date().toISOString(),
+    });
+    setNewCatName('');
+    setNewCatUnit('Stück');
+    setNewCatStep('1');
+  }
+
+  function startEditCategory(cat: { id?: number; name: string; defaultUnit: string; consumptionStep: number }) {
+    setEditingCatId(cat.id!);
+    setEditingCatName(cat.name);
+    setEditingCatUnit(cat.defaultUnit);
+    setEditingCatStep(String(cat.consumptionStep));
+  }
+
+  async function handleSaveCategoryEdit() {
+    if (!editingCatId || !editingCatName.trim()) return;
+    await updateCustomCategory(editingCatId, {
+      name: editingCatName.trim(),
+      defaultUnit: editingCatUnit,
+      consumptionStep: parseFloat(editingCatStep) || 1,
+    });
+    setEditingCatId(null);
   }
 
   async function handleExportJSON() {
@@ -293,27 +356,205 @@ export function Settings() {
           </button>
         </div>
         <div className="space-y-1">
-          {locations.map((loc) => (
-            <div
-              key={loc.id}
-              className="flex items-center justify-between rounded-lg bg-primary-700/30 px-3 py-2"
-            >
-              <span className="text-sm text-gray-300">{loc.name}</span>
-              <button
-                onClick={() => {
-                  const used = allProducts.filter((p) => !p.archived && p.storageLocation === loc.name).length;
-                  if (used > 0) {
-                    alert(t('settings.locationInUse', { name: loc.name, count: used }));
-                    return;
-                  }
-                  deleteStorageLocation(loc.id!);
-                }}
-                className="rounded p-1 text-gray-400 hover:bg-primary-600 hover:text-red-400"
+          {locations.map((loc) => {
+            const usedCount = allProducts.filter((p) => !p.archived && p.storageLocation === loc.name).length;
+            const isEditing = editingLocId === loc.id;
+
+            return (
+              <div
+                key={loc.id}
+                className="flex items-center justify-between rounded-lg bg-primary-700/30 px-3 py-2"
               >
-                <Trash2 size={14} />
-              </button>
+                {isEditing ? (
+                  <div className="flex flex-1 items-center gap-2">
+                    <input
+                      type="text"
+                      value={editingLocName}
+                      onChange={(e) => setEditingLocName(e.target.value)}
+                      onKeyDown={(e) => { if (e.key === 'Enter') handleSaveLocationRename(); if (e.key === 'Escape') setEditingLocId(null); }}
+                      className="flex-1 rounded border border-primary-500 bg-primary-900 px-2 py-1 text-sm text-gray-200 focus:border-green-500 focus:outline-none"
+                      autoFocus
+                    />
+                    <button onClick={handleSaveLocationRename} className="rounded p-1 text-green-400 hover:bg-primary-600">
+                      <Check size={14} />
+                    </button>
+                    <button onClick={() => setEditingLocId(null)} className="rounded p-1 text-gray-400 hover:bg-primary-600">
+                      <X size={14} />
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-300">{loc.name}</span>
+                      {usedCount > 0 && (
+                        <span className="rounded-full bg-primary-600 px-1.5 py-0.5 text-[10px] text-gray-400">
+                          {usedCount}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => startEditLocation(loc.id!, loc.name)}
+                        className="rounded p-1 text-gray-400 hover:bg-primary-600 hover:text-blue-400"
+                        title={t('settings.renameLocation')}
+                      >
+                        <Pencil size={14} />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (usedCount > 0) {
+                            alert(t('settings.locationInUse', { name: loc.name, count: usedCount }));
+                            return;
+                          }
+                          deleteStorageLocation(loc.id!);
+                        }}
+                        className="rounded p-1 text-gray-400 hover:bg-primary-600 hover:text-red-400"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Custom Categories */}
+      <section className="rounded-xl border border-primary-700 bg-primary-800/60 p-4">
+        <h3 className="mb-3 flex items-center gap-2 font-semibold text-gray-200">
+          <Tag size={18} className="text-purple-400" />
+          {t('settings.manageCategories')}
+        </h3>
+        <p className="mb-3 text-xs text-gray-400">{t('settings.manageCategoriesDesc')}</p>
+
+        {/* Add new category */}
+        <div className="mb-3 space-y-2 rounded-lg border border-primary-600 bg-primary-900/50 p-3">
+          <input
+            type="text"
+            value={newCatName}
+            onChange={(e) => setNewCatName(e.target.value)}
+            placeholder={t('settings.newCategoryPlaceholder')}
+            className="w-full rounded-lg border border-primary-600 bg-primary-900 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:border-green-500 focus:outline-none"
+          />
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="mb-1 block text-xs text-gray-400">{t('settings.defaultUnit')}</label>
+              <select
+                value={newCatUnit}
+                onChange={(e) => setNewCatUnit(e.target.value)}
+                className="w-full rounded-lg border border-primary-600 bg-primary-900 px-2 py-1.5 text-sm text-gray-200 focus:border-green-500 focus:outline-none"
+              >
+                {DEFAULT_UNITS.map((u) => <option key={u} value={u}>{t(`units.${u}`)}</option>)}
+              </select>
             </div>
-          ))}
+            <div>
+              <label className="mb-1 block text-xs text-gray-400">{t('settings.consumptionStep')}</label>
+              <input
+                type="number"
+                min="0.01"
+                step="0.01"
+                value={newCatStep}
+                onChange={(e) => setNewCatStep(e.target.value)}
+                className="w-full rounded-lg border border-primary-600 bg-primary-900 px-2 py-1.5 text-sm text-gray-200 focus:border-green-500 focus:outline-none"
+              />
+            </div>
+          </div>
+          <button
+            onClick={handleAddCategory}
+            disabled={!newCatName.trim()}
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-purple-600 px-3 py-2 text-sm font-medium text-white hover:bg-purple-500 disabled:opacity-50"
+          >
+            <Plus size={16} />
+            {t('settings.addCategory')}
+          </button>
+        </div>
+
+        {/* Existing custom categories */}
+        <div className="space-y-1">
+          {customCategories.map((cat) => {
+            const isEditing = editingCatId === cat.id;
+            const usedCount = allProducts.filter((p) => p.category === cat.name).length;
+
+            return (
+              <div key={cat.id} className="rounded-lg bg-primary-700/30 px-3 py-2">
+                {isEditing ? (
+                  <div className="space-y-2">
+                    <input
+                      type="text"
+                      value={editingCatName}
+                      onChange={(e) => setEditingCatName(e.target.value)}
+                      className="w-full rounded border border-primary-500 bg-primary-900 px-2 py-1 text-sm text-gray-200 focus:border-green-500 focus:outline-none"
+                      autoFocus
+                    />
+                    <div className="grid grid-cols-2 gap-2">
+                      <select
+                        value={editingCatUnit}
+                        onChange={(e) => setEditingCatUnit(e.target.value)}
+                        className="rounded border border-primary-500 bg-primary-900 px-2 py-1 text-sm text-gray-200"
+                      >
+                        {DEFAULT_UNITS.map((u) => <option key={u} value={u}>{t(`units.${u}`)}</option>)}
+                      </select>
+                      <input
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        value={editingCatStep}
+                        onChange={(e) => setEditingCatStep(e.target.value)}
+                        className="rounded border border-primary-500 bg-primary-900 px-2 py-1 text-sm text-gray-200"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <button onClick={handleSaveCategoryEdit} className="flex-1 rounded bg-green-600 px-2 py-1 text-xs text-white hover:bg-green-500">
+                        <Check size={14} className="mx-auto" />
+                      </button>
+                      <button onClick={() => setEditingCatId(null)} className="flex-1 rounded bg-primary-600 px-2 py-1 text-xs text-gray-300 hover:bg-primary-500">
+                        <X size={14} className="mx-auto" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-sm text-gray-300">{cat.name}</span>
+                      <span className="ml-2 text-xs text-gray-500">
+                        {cat.consumptionStep} {t(`units.${cat.defaultUnit}`)}
+                      </span>
+                      {usedCount > 0 && (
+                        <span className="ml-2 rounded-full bg-primary-600 px-1.5 py-0.5 text-[10px] text-gray-400">
+                          {usedCount}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => startEditCategory(cat)}
+                        className="rounded p-1 text-gray-400 hover:bg-primary-600 hover:text-blue-400"
+                      >
+                        <Pencil size={14} />
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (usedCount > 0) {
+                            alert(t('settings.categoryInUse', { name: cat.name, count: usedCount }));
+                            return;
+                          }
+                          deleteCustomCategory(cat.id!);
+                        }}
+                        className="rounded p-1 text-gray-400 hover:bg-primary-600 hover:text-red-400"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          {customCategories.length === 0 && (
+            <p className="text-center text-xs text-gray-500 py-2">{t('settings.noCategoriesYet')}</p>
+          )}
         </div>
       </section>
 
@@ -449,7 +690,7 @@ export function Settings() {
             <p>{t('settings.privacyDataProcessingText')}</p>
 
             <p className="font-medium text-gray-300">{t('settings.privacyExternalServices')}</p>
-            <p>{t('settings.privacyExternalServicesText')}</p>
+            <p>{t('settings.privacyNoExternalServices')}</p>
 
             <p className="font-medium text-gray-300">{t('settings.privacyNotifications')}</p>
             <p>{t('settings.privacyNotificationsText')}</p>

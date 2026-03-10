@@ -4,7 +4,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../lib/db';
 import { computeStats, getExpiryStatus, getDaysUntilExpiry, formatDate, formatDaysUntil } from '../lib/utils';
 import { useAppStore } from '../store/useAppStore';
-import type { ProductCategory } from '../types';
+import { BUILTIN_CATEGORIES, CATEGORY_LABELS, type ProductCategory } from '../types';
 import { StatRing } from './StatRing';
 import {
   Package,
@@ -45,10 +45,12 @@ export function Dashboard() {
       .sort((a, b) => a.daysLeft - b.daysLeft)
       .slice(0, 8);
 
-    const catBreakdown = (['konserven', 'wasser', 'medizin', 'werkzeug', 'hygiene', 'lebensmittel', 'getranke', 'elektronik', 'kleidung', 'sonstiges'] as ProductCategory[])
+    // Collect all unique categories from active products
+    const usedCategories = [...new Set(active.map((p) => p.category))];
+    const catBreakdown = usedCategories
       .map((key) => ({
         key,
-        label: t(`categories.${key}`),
+        label: BUILTIN_CATEGORIES.includes(key as ProductCategory) ? CATEGORY_LABELS[key as ProductCategory] : key,
         count: active.filter((p) => p.category === key).length,
       }))
       .filter((c) => c.count > 0)

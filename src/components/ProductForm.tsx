@@ -6,8 +6,9 @@ import { useAppStore } from '../store/useAppStore';
 import { compressImage } from '../lib/utils';
 import {
   DEFAULT_UNITS,
+  BUILTIN_CATEGORIES,
+  CATEGORY_LABELS,
   type Product,
-  type ProductCategory,
 } from '../types';
 import { Camera, Upload, X, Save, ArrowLeft } from 'lucide-react';
 
@@ -16,7 +17,7 @@ const FORM_STORAGE_KEY = 'mhd-inventar-form-draft';
 interface FormState {
   name: string;
   barcode: string;
-  category: ProductCategory;
+  category: string;
   storageLocation: string;
   quantity: string;
   unit: string;
@@ -67,6 +68,7 @@ function clearFormDraft() {
 export function ProductForm() {
   const { editingProductId, setPage, setEditingProductId, scannedData, setScannedData } = useAppStore();
   const locations = useLiveQuery(() => db.storageLocations.toArray()) ?? [];
+  const customCategories = useLiveQuery(() => db.customCategories.toArray()) ?? [];
   const existingProduct = useLiveQuery(() => (editingProductId ? db.products.get(editingProductId) : undefined), [editingProductId]);
   const { t } = useTranslation();
 
@@ -141,6 +143,15 @@ export function ProductForm() {
     }
   }, [locations, editingProductId, form.storageLocation]);
 
+  // When category changes, set default unit from custom category if applicable
+  useEffect(() => {
+    if (editingProductId) return; // Don't change unit when editing
+    const customCat = customCategories.find((c) => c.name === form.category);
+    if (customCat) {
+      setForm((prev) => ({ ...prev, unit: customCat.defaultUnit, quantity: String(customCat.consumptionStep) }));
+    }
+  }, [form.category, customCategories, editingProductId]);
+
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
@@ -195,6 +206,12 @@ export function ProductForm() {
     } finally { setSaving(false); }
   }
 
+  // Build the category options: built-in + custom
+  const categoryOptions: { value: string; label: string }[] = [
+    ...BUILTIN_CATEGORIES.map((key) => ({ value: key, label: CATEGORY_LABELS[key] })),
+    ...customCategories.map((cat) => ({ value: cat.name, label: cat.name })),
+  ];
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -245,9 +262,9 @@ export function ProductForm() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-300">{t('form.category')}</label>
-            <select value={form.category} onChange={(e) => updateField('category', e.target.value as ProductCategory)} className="w-full rounded-lg border border-primary-600 bg-primary-800 px-4 py-2.5 text-gray-200 focus:border-green-500 focus:outline-none">
-              {(['konserven', 'wasser', 'medizin', 'werkzeug', 'hygiene', 'lebensmittel', 'getranke', 'elektronik', 'kleidung', 'sonstiges'] as ProductCategory[]).map((key) => (
-                <option key={key} value={key}>{t(`categories.${key}`)}</option>
+            <select value={form.category} onChange={(e) => updateField('category', e.target.value)} className="w-full rounded-lg border border-primary-600 bg-primary-800 px-4 py-2.5 text-gray-200 focus:border-green-500 focus:outline-none">
+              {categoryOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
           </div>
